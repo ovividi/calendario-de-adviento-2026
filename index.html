@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calendario de Adviento Vintage</title>
+  <!-- Fuentes vintage de Google Fonts para variar las tipografías de cada casilla -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Cinzel:wght@700;900&family=Playfair+Display:ital,wght@0,700;0,900;1,800&family=Rye&family=Special+Elite&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Cinzel:wght@700;900&family=Playfair+Display:ital,wght@0,700;0,900;1,800&family=Rye&family=Special+Elite&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Corben:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --crema: #f6efe2;
+      --crema-oscuro: #dfcaa5;
+      --cremaA: #ab8f5f;
+      --rojo: #8a2b28;
+      --rojo-oscuro: #790e0b;
+      --verde: #0b8d4a;
+      --verde-oscuro: #113824;
+      --dorado: #dfb013;
+      --madera: #5d2803;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Corben', Corben, serif;
+      background-image: url("fondo.jpg");
+      background-size: cover;        /* Ajusta la imagen para cubrir toda la pantalla sin deformarse */
+      background-position: center;   /* Centra la imagen */
+      background-attachment: fixed;  /* Mantiene el fondo quieto al hacer scroll hacia abajo */
+      background-repeat: no-repeat;  /* Evita que la foto se repita en mosaico */
+      color: var(--verde-oscuro);
+      margin: 0;
+      padding: 20px 10px 50px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 15px;
+    }
+
+    h1 {
+      font-family: 'Corben', serif;
+      font-size: clamp(1.6rem, 4vw, 2.5rem);
+      color: #1b5336;
+      margin: 0 0 6px 0;
+      letter-spacing: 1px;
+    }
+
+    header p {
+      margin: 0;
+      font-style: italic;
+      color: #6a0606;
+    }
+
+    /* ==========================================================
+       ESTRUCTURA DEL ÁRBOL DE NAVIDAD
+       ========================================================== */
+    .arbol-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      max-width: 720px;
+      margin-top: 10px;
+    }
+
+    /* Estrella dorada superior */
+    .estrella-punta {
+  width: 96px;
+  height: 96px;
+  background: linear-gradient(135deg, #f5d76e, #d4af37, #aa821c);
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin-bottom: -24px;
+  z-index: 6;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.35));
+  transition: transform 0.25s ease;
+}
+
+.estrella-punta:hover {
+  transform: scale(1.12);
+}
+
+.estrella-punta span {
+  font-family: 'Corben', serif;
+  font-weight: 900;
+  font-size: 1.45rem;
+  color: var(--rojo-oscuro);
+  margin-top: 8px;
+}
+
+.estrella-punta.abierta {
+  filter: sepia(0.35) brightness(0.92) drop-shadow(0 4px 10px rgba(0, 0, 0, 0.35));
+}
+
+    @keyframes brilloEstrella {
+      from { transform: scale(1) rotate(-3deg); }
+      to { transform: scale(1.06) rotate(3deg); }
+    }
+
+    /* Silueta verde del árbol detrás de las casillas */
+    .cuerpo-arbol {
+      position: relative;
+      width: 100%;
+      padding: 38px 16px 32px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      z-index: 2;
+    }
+
+    /* Fondo verde con forma de pino escalonado */
+    .cuerpo-arbol::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, #215e3e 0%, #16442c 100%);
+      clip-path: polygon(
+        50% 0%,
+        72% 16%, 64% 16%,
+        82% 33%, 73% 33%,
+        90% 52%, 81% 52%,
+        96% 72%, 87% 72%,
+        100% 94%, 0% 94%,
+        13% 72%, 4% 72%,
+        19% 52%, 10% 52%,
+        27% 33%, 18% 33%,
+        36% 16%, 28% 16%
+      );
+      z-index: -1;
+      filter: drop-shadow(0 12px 18px rgba(0,0,0,0.22));
+    }
+
+    /* Cada fila horizontal del árbol */
+    .fila-arbol {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: clamp(8px, 2vw, 18px);
+      width: 100%;
+    }
+
+
+    /* Tronco inferior del árbol */
+    .tronco-arbol {
+      width: 90px;
+      height: 95px; /* Más alto para que siga viéndose largo por debajo */
+      background: linear-gradient(90deg, #472b17, #6b4427, #472b17);
+      border-radius: 0 0 8px 8px;
+      margin-top: -55px; /* Sube el tronco para que quede metido detrás de la base del árbol */
+      box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+      z-index: 1;
+    }
+    /* ==========================================================
+       ESTILO BASE DE CADA ETIQUETA / CASILLA
+       ========================================================== */
+   /* Estilo base de cada bola de Navidad */
+    .casilla {
+      width: clamp(60px, 14vw, 96px);
+      height: clamp(60px, 14vw, 96px); /* Mismo ancho y alto para que sea un círculo perfecto */
+      border-radius: 50% !important;    /* Fuerza la forma redonda en todos los estilos */
+      clip-path: none !important;       /* Quita los recortes octogonales antiguos */
+      background-color: var(--crema);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      user-select: none;
+      position: relative;
+      margin-top: 12px;                 /* Deja espacio arriba para el enganche de la bola */
+      transition: transform 0.22s ease, box-shadow 0.22s ease;
+      box-shadow: inset -6px -8px 14px rgba(0, 0, 0, 0.22), 
+                  inset 5px 5px 10px rgba(218, 152, 44, 0.65),
+                  0 6px 12px rgba(0, 0, 0, 0.38);
+      overflow: visible;                /* Permite que se vea el capuchón dorado por fuera */
+    }
+
+    /* Capuchón metálico dorado e hilo superior de cada bola */
+    .casilla::before {
+      content: "";
+      position: absolute;
+      top: -11px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 16px;
+      height: 11px;
+      background: linear-gradient(90deg, #9e7b18, #f5d76e, #9e7b18);
+      border-radius: 3px 3px 0 0;
+      box-shadow: 0 -6px 0 -6px var(--dorado), 0 -7px 0 -6px var(--dorado);
+      z-index: 3;
+    }
+
+    .casilla:hover {
+      transform: scale(1.1) rotate(0deg) !important;
+      z-index: 10;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.45);
+    }
+
+    .casilla .numero {
+      font-size: clamp(1.4rem, 3.5vw, 2.3rem);
+      line-height: 1;
+      z-index: 2;
+    }
+
+    /* Estado cuando la casilla ya fue abierta */
+    .casilla.abierta {
+      filter: sepia(0.35) brightness(0.92);
+      box-shadow: inset 0 0 12px rgba(0,0,0,0.35);
+    }
+
+    .casilla.abierta::after {
+      content: "✓";
+      position: absolute;
+      bottom: 3px;
+      right: 5px;
+      font-size: 0.75rem;
+      font-weight: bold;
+      color: var(--verde-oscuro);
+      background: var(--crema-oscuro);
+      border-radius: 50%;
+      width: 16px;
+      height: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ==========================================================
+       24 DISEÑOS ÚNICOS INSPIRADOS EN TU IMAGEN VINTAGE
+       ========================================================== */
+    
+    /* 1: Crema vertical con doble marco verde y número rojo alto */
+    .estilo-1 {
+      border: 4px solid var(--verde);
+      outline: 2px solid var(--verde-oscuro);
+      outline-offset: -6px;
+      color: var(--rojo);
+      font-family: 'Alfa Slab One', serif;
+      transform: rotate(-1.5deg);
+    }
+
+    /* 2: Esquinas redondeadas, doble línea roja, número verde */
+    .estilo-2 {
+      border-radius: 14px;
+      border: 4px solid var(--rojo);
+      box-shadow: inset 0 0 0 3px var(--crema), inset 0 0 0 5px var(--rojo);
+      color: var(--verde);
+      font-family: 'Cinzel', serif;
+      font-weight: 900;
+      transform: rotate(1deg);
+    }
+
+    /* 3: Sello vintage con marco punteado verde y número rojo cursivo */
+    .estilo-3 {
+      border: 3px dotted var(--verde-oscuro);
+      outline: 3px solid var(--crema);
+      color: var(--rojo);
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-weight: 900;
+      transform: rotate(-1deg);
+    }
+
+    /* 4: Borde a rayas diagonales verde/crema y número rojo ancho */
+    .estilo-4 {
+      border: 6px solid transparent;
+      background:
+        linear-gradient(var(--crema), var(--crema)) padding-box,
+        repeating-linear-gradient(45deg, var(--verde) 0 6px, var(--crema) 6px 12px) border-box;
+      color: var(--rojo);
+      font-family: 'Alfa Slab One', serif;
+      transform: rotate(1.5deg);
+    }
+
+    /* 5: Etiqueta con esquinas recortadas (octogonal) y borde rojo */
+    .estilo-5 {
+      clip-path: polygon(16% 0%, 84% 0%, 100% 14%, 100% 86%, 84% 100%, 16% 100%, 0% 86%, 0% 14%);
+      background: var(--rojo);
+      padding: 4px;
+      color: var(--verde);
+      font-family: 'Cinzel', serif;
+      font-weight: 900;
+    }
+    .estilo-5 {
+      background-color: var(--crema);
+      border: 4px solid var(--rojo);
+      outline: 2px dashed var(--dorado);
+      outline-offset: -7px;
+      color: var(--verde);
+      font-family: 'Cinzel', serif;
+      font-weight: 900;
+    }
+
+    /* 6: Fondo rojo envejecido con recuadro interior crema y número verde bloque */
+    .estilo-6 {
+      background-color: var(--rojo);
+      border-radius: 8px;
+      padding: 7px;
+      color: var(--verde-oscuro);
+      font-family: 'Alfa Slab One', serif;
+      transform: rotate(-1deg);
+    }
+   .estilo-6 {
+      background-color: var(--rojo);
+      border: 4px solid var(--dorado);
+      color: var(--crema);
+      font-family: 'Alfa Slab One', serif;
+      text-shadow: 2px 2px 0 var(--verde-oscuro);
+      transform: rotate(-1deg);
+    }
+
+    /* 7: Número rojo con sombra 3D negra y borde fino oscuro */
+    .estilo-7 {
+      border: 2px solid var(--verde-oscuro);
+      color: var(--rojo);
+      font-family: 'Alfa Slab One', serif;
+      text-shadow: 3px 3px 0px var(--verde-oscuro);
+      transform: rotate(1.2deg);
+    }
+
+    /* 8: Marco ornamental rojo y número verde */
+    .estilo-8 {
+      border: 5px double var(--rojo);
+      outline: 2px dashed var(--rojo);
+      outline-offset: -8px;
+      color: var(--verde);
+      font-family: 'Rye', serif;
+      transform: rotate(-1.5deg);
+    }
+
+    /* 9: Marco de cuadros escoceses (gingham) verdes y número rojo */
+    .estilo-9 {
+      border: 7px solid transparent;
+      background:
+        linear-gradient(var(--crema), var(--crema)) padding-box,
+        repeating-conic-gradient(var(--verde) 0% 25%, #0d2b1b 0% 50%) 0 0 / 10px 10px border-box;
+      color: var(--rojo);
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+    }
+
+    /* 10: Etiqueta clásica crema con borde rojo fino y número verde grande */
+    .estilo-10 {
+      border: 3px solid var(--rojo);
+      color: var(--verde);
+      font-family: 'Cinzel', serif;
+      font-weight: 900;
+      transform: rotate(1deg);
+    }
+
+    /* 11: Octágono con doble línea verde y líneas de libreta */
+    .estilo-11 {
+      clip-path: polygon(18% 0%, 82% 0%, 100% 18%, 100% 82%, 82% 100%, 18% 100%, 0% 82%, 0% 18%);
+      background: repeating-linear-gradient(to bottom, var(--crema) 0px, var(--crema) 14px, #c9bca6 15px);
+      border: 3px solid var(--verde);
+      color: var(--rojo);
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+    }
+
+    /* 12: Marco tartán rojo y negro con número verde */
+    .estilo-12 {
+      border: 6px solid transparent;
+      background:
+        linear-gradient(var(--crema), var(--crema)) padding-box,
+        repeating-conic-gradient(var(--rojo) 0% 25%, #222 0% 50%) 0 0 / 10px 10px border-box;
+      color: var(--verde-oscuro);
+      font-family: 'Special Elite', monospace;
+      font-weight: bold;
+      transform: rotate(-1.2deg);
+    }
+
+    /* 13: Etiqueta ovalada con doble borde verde y número rojo */
+    .estilo-13 {
+      border-radius: 50%;
+      border: 4px solid var(--verde);
+      box-shadow: inset 0 0 0 3px var(--crema), inset 0 0 0 5px var(--verde);
+      color: var(--rojo);
+      font-family: 'Rye', serif;
+    }
+
+    /* 14: Borde bastón de caramelo (rayas rojas y blancas) y número verde */
+    .estilo-14 {
+      border: 6px solid transparent;
+      background:
+        linear-gradient(var(--crema), var(--crema)) padding-box,
+        repeating-linear-gradient(90deg, var(--rojo) 0 7px, var(--crema) 7px 14px) border-box;
+      color: var(--verde);
+      font-family: 'Cinzel', serif;
+      font-weight: 900;
+      transform: rotate(1.5deg);
+    }
+
+    /* 15: Bola de cuadritos verde menta con número rojo */
+    .estilo-15 {
+      background: repeating-conic-gradient(#012d14 0% 25%, var(--crema) 0% 50%) 0 0 / 10px 10px;
+      border: 4px solid var(--verde);
+      color: var(--rojo);
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      text-shadow: 1px 1px 0 var(--crema), -1px -1px 0 var(--crema);
+    }
+.estilo-15 {
+      background: repeating-conic-gradient(#7aa38c 0% 25%, var(--crema) 0% 50%) 0 0 / 10px 10px;
+      border: 4px solid var(--verde);
+      color: var(--rojo);
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      text-shadow: 1px 1px 0 var(--crema), -1px -1px 0 var(--crema);
+    }
+
+    /* 16: Fondo rayado diagonal rojo/crema y borde verde */
+    .estilo-16 {
+      background: repeating-linear-gradient(45deg, var(--crema) 0 5px, #d99b8c 5px 8px);
+      border: 4px solid var(--verde-oscuro);
+      color: var(--verde-oscuro);
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-weight: 900;
+      text-shadow: 1px 1px 0 var(--crema);
+      transform: rotate(-1deg);
+    }
+
+    /* 17: Borde punteado verde estilo sello y número rojo con sombra */
+    .estilo-17 {
+      border: 4px dotted var(--verde);
+      color: var(--rojo);
+      font-family: 'Alfa Slab One', serif;
+      text-shadow: 2px 2px 0 var(--verde-oscuro);
+    }
+
+    /* 18: Etiqueta roja intensa con borde crema y número verde rodeado */
+    .estilo-18 {
+      background-color: var(--rojo);
+      border: 4px solid var(--crema);
+      color: var(--verde-oscuro);
+      font-family: 'Alfa Slab One', serif;
+      text-shadow: -1px -1px 0 var(--crema), 1px -1px 0 var(--crema), -1px 1px 0 var(--crema), 1px 1px 0 var(--crema);
+      transform: rotate(1.5deg);
+    }
+
+    /* 19: Etiqueta roja estilo escudo antiguo con número perfilado */
+    .estilo-19 {
+      background: radial-gradient(circle, var(--rojo) 60%, var(--rojo-oscuro) 100%);
+      border-radius: 18px 18px 28px 28px;
+      border: 3px double var(--crema);
+      color: var(--crema);
+      font-family: 'Cinzel', serif;
+      font-weight: 900;
+    }
+
+    /* 20: Rayas diagonales verdes en el marco y número rojo texturizado */
+    .estilo-20 {
+      border: 6px solid transparent;
+      background:
+        linear-gradient(var(--crema), var(--crema)) padding-box,
+        repeating-linear-gradient(-45deg, var(--verde) 0 6px, var(--crema) 6px 12px) border-box;
+      color: var(--rojo);
+      font-family: 'Rye', serif;
+      transform: rotate(-1.5deg);
+    }
+
+    /* 21: Marco vichy (cuadritos) rojo y blanco con número verde */
+    .estilo-21 {
+      border: 6px solid transparent;
+      background:
+        linear-gradient(var(--crema), var(--crema)) padding-box,
+        repeating-conic-gradient(var(--rojo) 0% 25%, #f7d6d4 0% 50%) 0 0 / 8px 8px border-box;
+      color: var(--verde-oscuro);
+      font-family: 'Special Elite', monospace;
+      font-weight: bold;
+    }
+
+    /* 22: Marco vichy verde brillante con número rojo */
+    .estilo-22 {
+      border: 6px solid transparent;
+      background:
+        linear-gradient(var(--crema), var(--crema)) padding-box,
+        repeating-conic-gradient(#2e7d4b 0% 25%, #bde3c9 0% 50%) 0 0 / 8px 8px border-box;
+      color: var(--rojo);
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      transform: rotate(1deg);
+    }
+
+    /* 23: Óvalo con borde punteado rojo y número verde fino */
+    .estilo-23 {
+      border-radius: 50%;
+      border: 4px dashed var(--rojo);
+      color: var(--verde);
+      font-family: 'Cinzel', serif;
+      font-weight: 700;
+      transform: rotate(-1deg);
+    }
+
+    /* 24: Gran etiqueta final de Nochebuena con doble marco dorado/verde y número rojo */
+    .estilo-24 {
+      border: 4px solid var(--verde);
+      box-shadow: inset 0 0 0 3px var(--dorado), 0 6px 14px rgba(0,0,0,0.4);
+      color: var(--rojo);
+      font-family: 'Rye', serif;
+      transform: rotate(1deg);
+    }
+
+    /* ==========================================================
+       VENTANA EMERGENTE (MODAL)
+       ========================================================== */
+    .modal-fondo {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(17, 36, 24, 0.72);
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      z-index: 100;
+      backdrop-filter: blur(2px);
+    }
+
+    .modal-caja {
+      background: var(--crema);
+      padding: 32px 26px;
+      border-radius: 16px;
+      max-width: 440px;
+      width: 100%;
+      max-height: 85vh;
+      overflow-y: auto;
+      text-align: center;
+      border: 4px double var(--rojo);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+      animation: aparecer 0.25s ease-out;
+    }
+
+    @keyframes aparecer {
+      from { transform: scale(0.85); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .modal-caja h2 {
+      font-family: 'Corben', serif;
+      color: var(--rojo);
+      margin-top: 0;
+    }
+
+    
+    .modal-caja img {
+      max-width: 100%;
+      max-height: 55vh;          /* Evita que fotos muy verticales ocupen toda la pantalla */
+      object-fit: contain;       /* Mantiene la proporción original de la foto sin recortarla */
+      border-radius: 8px;
+      border: 2px solid var(--dorado);
+      margin: 12px 0;
+    }
+
+    .boton-cerrar {
+      margin-top: 18px;
+      background-color: var(--verde);
+      color: var(--crema);
+      border: 2px solid var(--dorado);
+      padding: 10px 26px;
+      border-radius: 8px;
+      font-family: 'Corben', serif;
+      font-size: 0.95rem;
+      cursor: pointer;
+    }
+
+    .boton-cerrar:hover {
+      background-color: var(--verde-oscuro);
+    }
+
+    .controles-pie {
+      margin-top: 35px;
+    }
+
+    .controles-pie button {
+      background: rgba(255,255,255,0.7);
+      border: 1px solid #b5a895;
+      padding: 6px 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      color: #5c5346;
+      font-size: 0.8rem;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Feliz Navidad. Te quiero mucho <3 </h1>
+    <p>Abre una bolica cada día hasta Navidad</p>
+  </header>
+
+  <!-- ÁRBOL DE NAVIDAD CON LAS 25 CASILLAS -->
+  <div class="arbol-wrapper">
+    <div class="estrella-punta" id="estrella-25"><span>25</span></div>
+    <main class="cuerpo-arbol" id="contenedor-arbol"></main>
+    <div class="tronco-arbol"></div>
+  </div>
+
+  <!-- VENTANA EMERGENTE CON TU SORPRESA -->
+  <div class="modal-fondo" id="modal">
+    <div class="modal-caja">
+      <h2 id="modal-titulo">Día X</h2>
+      <p id="modal-texto">Contenido del día...</p>
+      <div id="modal-extra"></div>
+      <button class="boton-cerrar" onclick="cerrarModal()">Cerrar</button>
+    </div>
+  </div>
+
+  <div class="controles-pie">
+    <button onclick="reiniciarProgreso()">Cerrar casillas abiertas (modo prueba)</button>
+  </div>
+/* ==========================================================
+       ADAPTACIÓN ESPECÍFICA PARA MÓVILES (pantallas < 520px)
+       ========================================================== */
+    @media (max-width: 520px) {
+      body {
+        padding: 15px 6px 40px;
+      }
+
+      .estrella-punta {
+        width: 72px;
+        height: 72px;
+        margin-bottom: -18px;
+      }
+
+      .estrella-punta span {
+        font-size: 1.15rem;
+      }
+
+      .cuerpo-arbol {
+        padding: 28px 8px 24px;
+        gap: 10px;
+      }
+
+      .casilla {
+        margin-top: 8px;
+        border-width: 3px !important; /* Bordes un poco más finos para que luzca el número */
+      }
+
+      /* Capuchón dorado proporcional en móvil */
+      .casilla::before {
+        top: -8px;
+        width: 12px;
+        height: 8px;
+      }
+
+      .tronco-arbol {
+        width: 65px;
+        height: 60px;
+        margin-top: -32px;
+      }
+
+      .modal-caja {
+        padding: 22px 16px;
+        max-height: 82vh;
+      }
+    }
+  <script>
+    /* ==========================================================
+       1. CONFIGURACIÓN Y SORPRESAS DE LOS 24 DÍAS
+       Edita aquí tus textos, fotos o enlaces
+       ========================================================== */
+    const BLOQUEAR_POR_FECHA_REAL = false; // Cambia a "true" cuando lo termines de diseñar
+
+    const sorpresas = [
+      { dia: 1,  titulo: "Día de explicación", texto: "Cada día encontrarás la expliación del día que es (la más absurda de encuentre) acompañada de una foto y un mensajico. T quiero mucho <3 Nos vemos mañana" },
+      { dia: 2,  titulo: "Día Internacional para la Abolición de la Esclavitud", texto: "mamma" , imagen: "fotos/foto2.jpeg" },
+      { dia: 3,  titulo: "Día del Cine 3D", texto: "Sube el volumen y escucha nuestra canción navideña favorita.", imagen: "fotos/foto3.jpeg" },
+      { dia: 4,  titulo: "Día del Guepardo", texto: "Escribe aquí tu sorpresa para el día 4." , imagen: "fotos/foto4.jpeg" },
+      { dia: 5,  titulo: "Día Mundial del Suelo", texto: "Escribe aquí tu sorpresa para el día 5." , imagen: "fotos/foto5.jpeg" },
+      { dia: 6,  titulo: "Día de la Constitución", texto: "Escribe aquí tu sorpresa para el día 6." , imagen: "fotos/foto6.jpeg" },
+      { dia: 7,  titulo: "Día de las Velitas", texto: "Escribe aquí tu sorpresa para el día 7." , imagen: "fotos/foto7.jpeg" },
+      { dia: 8,  titulo: "Día de la Virgen", texto: "Escribe aquí tu sorpresa para el día 8." , imagen: "fotos/foto8.jpeg" },
+      { dia: 9,  titulo: "Día Internacional contra la Corrupción", texto: "Escribe aquí tu sorpresa para el día 9." , imagen: "fotos/foto9.jpeg" },
+      { dia: 10, titulo: "Día del Trabajador Social (Pilar es eso)", texto: "Escribe aquí tu sorpresa para el día 10." , imagen: "fotos/foto10.jpeg"},
+      { dia: 11, titulo: "Día Internacional de las Montañas", texto: "Escribe aquí tu sorpresa para el día 11." , imagen: "fotos/foto11.jpeg"},
+      { dia: 12, titulo: "Día Internacional de la Cobertura", texto: "¡Ya llevamos 12 días! Hoy toca paseo para ver las luces de Navidad.", imagen: "fotos/foto12.jpeg" },
+      { dia: 13, titulo: "Día Internacional del Canto Coral", texto: "Escribe aquí tu sorpresa para el día 13." , imagen: "fotos/foto13.jpeg" },
+      { dia: 14, titulo: "Día Mundial del Mono (tu día)", texto: "Escribe aquí tu sorpresa para el día 14." , imagen: "fotos/foto14.jpeg" },
+      { dia: 15, titulo: "Día Mundial del Otaku (ugh)", texto: "Escribe aquí tu sorpresa para el día 15." , imagen: "fotos/foto15.jpeg" },
+      { dia: 16, titulo: "Día del nacimiento de Beethoven", texto: "Escribe aquí tu sorpresa para el día 16." , imagen: "fotos/foto16.jpeg" },
+      { dia: 17, titulo: "Hoy no hay día de nada :(", texto: "Escribe aquí tu sorpresa para el día 17." , imagen: "fotos/foto17.jpeg" },
+      { dia: 18, titulo: "Día del Jersey Navideño Feo", texto: "Escribe aquí tu sorpresa para el día 18." , imagen: "fotos/foto18.jpeg" },
+      { dia: 19, titulo: "Día Internacional del Emo", texto: "Escribe aquí tu sorpresa para el día 19." , imagen: "fotos/foto19.jpeg" },
+      { dia: 20, titulo: "Día de las Migas", texto: "Escribe aquí tu sorpresa para el día 20." , imagen: "fotos/foto20.jpeg" },
+      { dia: 21, titulo: "Día del solsticio de invierno", texto: "Escribe aquí tu sorpresa para el día 21." , imagen: "fotos/foto21.png" },
+      { dia: 22, titulo: "Día Mundial del Termómetro", texto: "Escribe aquí tu sorpresa para el día 22." , imagen: "fotos/foto22.jpeg" },
+      { dia: 23, titulo: "Víspera de Nochebuena", texto: "Prepara el gorro de Papá Noel, ¡mañana es el gran día!" , imagen: "fotos/foto23.jpeg" },
+      { dia: 24, titulo: "Día de Nochebuena!", texto: "Gracias por abrir cada día conmigo. ¡Te quiero muchísimo!" , imagen: "fotos/foto24.png" },
+      { dia: 25, titulo: "Día de Navidad", texto: "Hoy si hay regalo! Ya puedes abrirlo (si no lo habías hecho ya...)", imagen: "fotos/foto25.jpg" }
+  ]
+
+    /* ==========================================================
+       2. ESTRUCTURA DE FILAS DEL ÁRBOL (Igual que en la foto)
+       Fila 1: 1 casilla | Fila 2: 2 casillas ... Fila 7: 4 casillas
+       ========================================================== */
+    const estructuraFilasArbol = [1, 2, 3, 4, 5, 5, 4]; // Suma = 24 casillas
+
+    const contenedorArbol = document.getElementById("contenedor-arbol");
+    let puertasAbiertas = JSON.parse(localStorage.getItem("adviento_arbol_abiertas")) || [];
+
+    function dibujarArbol() {
+      contenedorArbol.innerHTML = "";
+      let indiceSorpresa = 0;
+
+      // Bucle externo: recorre cada piso/fila del árbol
+      for (let fila = 0; fila < estructuraFilasArbol.length; fila++) {
+        const divFila = document.createElement("div");
+        divFila.className = "fila-arbol";
+
+        const cantidadEnEstaFila = estructuraFilasArbol[fila];
+
+        // Bucle interno: coloca las etiquetas correspondientes a esa fila
+        for (let col = 0; col < cantidadEnEstaFila; col++) {
+          if (indiceSorpresa >= sorpresas.length) break;
+
+          const item = sorpresas[indiceSorpresa];
+          const estaAbierta = puertasAbiertas.includes(item.dia);
+
+          const casilla = document.createElement("div");
+          // Aplica su estilo vintage único (estilo-1 hasta estilo-24)
+          casilla.className = `casilla estilo-${item.dia}` + (estaAbierta ? " abierta" : "");
+          casilla.innerHTML = `<span class="numero">${item.dia}</span>`;
+          casilla.onclick = () => intentarAbrirCasilla(item);
+
+          divFila.appendChild(casilla);
+          indiceSorpresa++;
+          // Conectar la estrella con el día 25
+      const sorpresa25 = sorpresas.find(s => s.dia === 25);
+      const estrella = document.getElementById("estrella-25");
+      if (sorpresa25 && estrella) {
+        estrella.classList.toggle("abierta", puertasAbiertas.includes(25));
+        estrella.onclick = () => intentarAbrirCasilla(sorpresa25);
+      }
+        }
+
+        contenedorArbol.appendChild(divFila);
+      }
+    }
+
+    function intentarAbrirCasilla(item) {
+      if (BLOQUEAR_POR_FECHA_REAL) {
+        const hoy = new Date();
+        const mes = hoy.getMonth(); // Diciembre es el mes 11 (empieza en 0)
+        const diaHoy = hoy.getDate();
+
+        if (mes !== 11 || diaHoy < item.dia) {
+          mostrarModal({
+            dia: item.dia,
+            titulo: "🔒 Bloqueat",
+            texto: `Ten pacienciaa! Se desbloqueará el ${item.dia} de diciembre.`
+          });
+          return;
+        }
+      }
+
+      if (!puertasAbiertas.includes(item.dia)) {
+        puertasAbiertas.push(item.dia);
+        localStorage.setItem("adviento_arbol_abiertas", JSON.stringify(puertasAbiertas));
+        dibujarArbol();
+      }
+
+      mostrarModal(item);
+    }
+
+    function mostrarModal(item) {
+      document.getElementById("modal-titulo").innerText = `Día ${item.dia} — ${item.titulo}`;
+      document.getElementById("modal-texto").innerText = item.texto;
+
+      const extra = document.getElementById("modal-extra");
+      extra.innerHTML = "";
+
+      if (item.imagen) {
+        extra.innerHTML += `<img src="${item.imagen}" alt="Sorpresa día ${item.dia}">`;
+      }
+
+      if (item.enlace) {
+        extra.innerHTML += `<p><a href="${item.enlace}" target="_blank" style="color: #b82925; font-weight: bold;">🎁 Abrir enlace sorpresa</a></p>`;
+      }
+
+      document.getElementById("modal").style.display = "flex";
+    }
+
+    function cerrarModal() {
+      document.getElementById("modal").style.display = "none";
+    }
+
+    function reiniciarProgreso() {
+      localStorage.removeItem("adviento_arbol_abiertas");
+      puertasAbiertas = [];
+      dibujarArbol();
+    }
+
+    dibujarArbol();
+  </script>
+</body>
+</html>
