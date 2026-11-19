@@ -241,282 +241,593 @@
       justify-content: center;
     }
 
-    /* ==========================================================
-       24 DISEÑOS ÚNICOS INSPIRADOS EN TU IMAGEN VINTAGE
+   /* ==========================================================
+       ESTILO BASE ILUSTRADO PARA TODAS LAS BOLAS
        ========================================================== */
-    
-    /* 1: Crema vertical con doble marco verde y número rojo alto */
+    .casilla {
+      width: clamp(46px, 13.5vw, 94px);
+      height: clamp(46px, 13.5vw, 94px);
+      border-radius: 50% !important;
+      clip-path: none !important;
+      border: 3px solid #1b1918 !important; /* Contorno negro estilo ilustración */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      user-select: none;
+      position: relative;
+      margin-top: 14px;
+      transition: transform 0.22s ease, box-shadow 0.22s ease;
+      box-shadow: inset -4px -5px 0 rgba(0, 0, 0, 0.22), 0 5px 10px rgba(0, 0, 0, 0.28);
+      overflow: visible;
+    }
+
+    .casilla:hover:not(.bloqueada) {
+      transform: scale(1.08) rotate(-2deg);
+    }
+
+    /* Capuchón superior estilo dibujo con anilla */
+    .casilla::before {
+      content: "";
+      position: absolute;
+      top: -11px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 16px;
+      height: 9px;
+      background-color: #e5bc63;
+      border: 2.5px solid #1b1918;
+      border-radius: 3px 3px 0 0;
+      box-shadow: 0 -6px 0 -4px #f3ece0, 0 -6px 0 -2px #1b1918;
+      z-index: 3;
+    }
+
+    /* Número con sombra/contorno oscuro para que se lea perfecto sobre cualquier fondo */
+    .casilla .numero {
+      font-size: clamp(1.15rem, 3.6vw, 2.2rem);
+      line-height: 1;
+      z-index: 4;
+      color: #fdf6e7;
+      text-shadow:
+        -1.5px -1.5px 0 #1b1918,
+         1.5px -1.5px 0 #1b1918,
+        -1.5px  1.5px 0 #1b1918,
+         1.5px  1.5px 0 #1b1918,
+         0px    3px   0 rgba(0, 0, 0, 0.35);
+    }
+
+   /* ==========================================================
+       ESTILO BASE ILUSTRADO COLORIDO (PALETA PASTEL Y VINTAGE)
+       ========================================================== */
+    .casilla {
+      width: clamp(46px, 13.5vw, 94px);
+      height: clamp(46px, 13.5vw, 94px);
+      border-radius: 50% !important;
+      clip-path: none !important;
+      border: 2.8px solid #231f20 !important; /* Trazo fino estilo ilustración */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      user-select: none;
+      position: relative;
+      margin-top: 14px;
+      transition: transform 0.22s ease, box-shadow 0.22s ease;
+      /* Sombra inferior suave y brillo de cristal arriba a la izquierda */
+      box-shadow: inset -5px -6px 0 rgba(0, 0, 0, 0.16),
+                  inset 5px 5px 8px rgba(255, 255, 255, 0.45),
+                  0 5px 10px rgba(0, 0, 0, 0.25);
+      overflow: visible;
+    }
+
+    .casilla:hover:not(.bloqueada) {
+      transform: scale(1.08) rotate(-2deg);
+    }
+
+    /* Capuchón metálico dorado con anilla superior */
+    .casilla::before {
+      content: "";
+      position: absolute;
+      top: -11px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 15px;
+      height: 9px;
+      background-color: #eab543;
+      border: 2.5px solid #231f20;
+      border-radius: 3px 3px 0 0;
+      box-shadow: 0 -6px 0 -4px #f3ece0, 0 -6px 0 -2px #231f20;
+      z-index: 3;
+    }
+
+    /* Números claros con borde oscuro nítido para máxima legibilidad */
+    .casilla .numero {
+      font-size: clamp(1.15rem, 3.6vw, 2.2rem);
+      line-height: 1;
+      z-index: 4;
+      color: #fffaf0;
+      text-shadow:
+        -1.5px -1.5px 0 #231f20,
+         1.5px -1.5px 0 #231f20,
+        -1.5px  1.5px 0 #231f20,
+         1.5px  1.5px 0 #231f20,
+         0px    2.5px 0 rgba(35, 31, 32, 0.45);
+    }
+
+    /* ==========================================================
+       ESTILO BASE ILUSTRADO VIVO Y CÁLIDO
+       ========================================================== */
+    .casilla {
+      width: clamp(46px, 13.5vw, 94px);
+      height: clamp(46px, 13.5vw, 94px);
+      border-radius: 50% !important;
+      clip-path: none !important;
+      border: 3px solid #1e191a !important; /* Contorno oscuro estilo dibujo */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      user-select: none;
+      position: relative;
+      margin-top: 14px;
+      transition: transform 0.22s ease, box-shadow 0.22s ease;
+      box-shadow: inset -5px -6px 0 rgba(0, 0, 0, 0.18),
+                  inset 5px 5px 8px rgba(255, 255, 255, 0.45),
+                  4px 6px 0 rgba(215, 180, 135, 0.45);
+      overflow: visible;
+    }
+
+    .casilla:hover:not(.bloqueada) {
+      transform: scale(1.08) rotate(-2deg);
+    }
+
+    /* Capuchón amarillo dorado vivo con anilla superior */
+    .casilla::before {
+      content: "";
+      position: absolute;
+      top: -11px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 16px;
+      height: 9px;
+      background-color: #f9b218;
+      border: 2.5px solid #1e191a;
+      border-radius: 3px 3px 0 0;
+      box-shadow: 0 -6px 0 -4px #f3ece0, 0 -6px 0 -2px #1e191a;
+      z-index: 3;
+    }
+
+    /* Base de los números (cada bola define su propio color de texto y contorno) */
+    .casilla .numero {
+      font-size: clamp(1.15rem, 3.6vw, 2.2rem);
+      line-height: 1;
+      z-index: 4;
+    }
+
+    /* ==========================================================
+       ESTILO BASE ILUSTRADO PARA TODAS LAS BOLAS
+       ========================================================== */
+    .casilla {
+      width: clamp(46px, 13.5vw, 94px);
+      height: clamp(46px, 13.5vw, 94px);
+      border-radius: 50% !important;
+      clip-path: none !important;
+      border: 3px solid #1b1918 !important; /* Contorno negro estilo ilustración */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      user-select: none;
+      position: relative;
+      margin-top: 14px;
+      transition: transform 0.22s ease, box-shadow 0.22s ease;
+      box-shadow: inset -4px -5px 0 rgba(0, 0, 0, 0.22), 0 5px 10px rgba(0, 0, 0, 0.28);
+      overflow: visible;
+    }
+
+    .casilla:hover:not(.bloqueada) {
+      transform: scale(1.08) rotate(-2deg);
+    }
+
+    /* Capuchón superior estilo dibujo con anilla */
+    .casilla::before {
+      content: "";
+      position: absolute;
+      top: -11px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 16px;
+      height: 9px;
+      background-color: #e5bc63;
+      border: 2.5px solid #1b1918;
+      border-radius: 3px 3px 0 0;
+      box-shadow: 0 -6px 0 -4px #f3ece0, 0 -6px 0 -2px #1b1918;
+      z-index: 3;
+    }
+
+    /* Número con sombra/contorno oscuro para que se lea perfecto sobre cualquier fondo */
+    .casilla .numero {
+      font-size: clamp(1.15rem, 3.6vw, 2.2rem);
+      line-height: 1;
+      z-index: 4;
+      color: #fdf6e7;
+      text-shadow:
+        -1.5px -1.5px 0 #1b1918,
+         1.5px -1.5px 0 #1b1918,
+        -1.5px  1.5px 0 #1b1918,
+         1.5px  1.5px 0 #1b1918,
+         0px    3px   0 rgba(0, 0, 0, 0.35);
+    }
+
+    /* ==========================================================
+       ESTILO BASE ILUSTRADO PARA TODAS LAS BOLAS
+       ========================================================== */
+    .casilla {
+      width: clamp(46px, 13.5vw, 94px);
+      height: clamp(46px, 13.5vw, 94px);
+      border-radius: 50% !important;
+      clip-path: none !important;
+      border: 3px solid #1b1918 !important; /* Contorno negro estilo ilustración */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      user-select: none;
+      position: relative;
+      margin-top: 14px;
+      transition: transform 0.22s ease, box-shadow 0.22s ease;
+      box-shadow: inset -4px -5px 0 rgba(0, 0, 0, 0.22), 0 5px 10px rgba(0, 0, 0, 0.28);
+      overflow: visible;
+    }
+
+    .casilla:hover:not(.bloqueada) {
+      transform: scale(1.08) rotate(-2deg);
+    }
+
+    /* Capuchón superior estilo dibujo con anilla */
+    .casilla::before {
+      content: "";
+      position: absolute;
+      top: -11px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 16px;
+      height: 9px;
+      background-color: #e5bc63;
+      border: 2.5px solid #1b1918;
+      border-radius: 3px 3px 0 0;
+      box-shadow: 0 -6px 0 -4px #f3ece0, 0 -6px 0 -2px #1b1918;
+      z-index: 3;
+    }
+
+    /* Número con sombra/contorno oscuro para que se lea perfecto sobre cualquier fondo */
+    .casilla .numero {
+      font-size: clamp(1.15rem, 3.6vw, 2.2rem);
+      line-height: 1;
+      z-index: 4;
+      color: #fdf6e7;
+      text-shadow:
+        -1.5px -1.5px 0 #1b1918,
+         1.5px -1.5px 0 #1b1918,
+        -1.5px  1.5px 0 #1b1918,
+         1.5px  1.5px 0 #1b1918,
+         0px    3px   0 rgba(0, 0, 0, 0.35);
+    }
+
+    /* ==========================================================
+       ESTAMPADOS Y TIPOGRAFÍAS ÚNICAS DEL 1 AL 24
+       ========================================================== */
+
+    /* 1: Roja con lunares dorados (como la 1ª de la imagen) */
     .estilo-1 {
-      border: 4px solid var(--verde);
-      outline: 2px solid var(--verde-oscuro);
-      outline-offset: -6px;
-      color: var(--rojo);
+      background-color: #a62c21;
+      background-image: radial-gradient(#e5bc63 1.8px, transparent 1.8px), radial-gradient(#e5bc63 1.8px, #a62c21 1.8px);
+      background-size: 22px 22px;
+      background-position: 0 0, 11px 11px;
       font-family: 'Alfa Slab One', serif;
-      transform: rotate(-1.5deg);
+    }
+    .estilo-1::before { background-color: #2c5e3b; }
+    .estilo-1 .numero {
+      color: #ffffff;
+      text-shadow: -1.5px -1.5px 0 #7a0618, 1.5px -1.5px 0 #7a0618, -1.5px 1.5px 0 #7a0618, 1.5px 1.5px 0 #7a0618;
     }
 
-    /* 2: Esquinas redondeadas, doble línea roja, número verde */
+    /* 2: Verde con ondas doradas y lazo rojo arriba */
     .estilo-2 {
-      border-radius: 14px;
-      border: 4px solid var(--rojo);
-      box-shadow: inset 0 0 0 3px var(--crema), inset 0 0 0 5px var(--rojo);
-      color: var(--verde);
+      background-color: #2c5e3b;
+      background-image: repeating-radial-gradient(circle at 50% -20%, transparent 0, transparent 12px, #e5bc63 13px, #e5bc63 15px, transparent 16px);
       font-family: 'Cinzel', serif;
       font-weight: 900;
-      transform: rotate(1deg);
+    }
+    .estilo-2::before {
+      width: 34px; height: 11px; top: -11px;
+      background: linear-gradient(90deg, #a62c21 42%, #1b1918 43%, #1b1918 57%, #a62c21 58%);
+      border-radius: 4px;
+    }
+    .estilo-2 .numero {
+      color: #ffd166;
+      text-shadow: -1.5px -1.5px 0 #7a0618, 1.5px -1.5px 0 #7a0618, -1.5px 1.5px 0 #7a0618, 1.5px 1.5px 0 #7a0618;
     }
 
-    /* 3: Sello vintage con marco punteado verde y número rojo cursivo */
+    /* 3: Roja con franja central dorada y crema */
     .estilo-3 {
-      border: 3px dotted var(--verde-oscuro);
-      outline: 3px solid var(--crema);
-      color: var(--rojo);
+      background: linear-gradient(165deg, #a62c21 36%, #e5bc63 37%, #e5bc63 43%, #fdf6e7 44%, #fdf6e7 56%, #e5bc63 57%, #e5bc63 63%, #a62c21 64%);
       font-family: 'Playfair Display', serif;
-      font-style: italic;
+      font-style: bold;
       font-weight: 900;
-      transform: rotate(-1deg);
+    }
+    .estilo-3 .numero {
+      color: #163a52;
+      text-shadow: -1.5px -1.5px 0 #eef6fa, 1.5px -1.5px 0 #eef6fa, -1.5px 1.5px 0 #eef6fa, 1.5px 1.5px 0 #eef6fa, 0 2.5px 0 rgba(255,255,255,0.8);
     }
 
-    /* 4: Borde a rayas diagonales verde/crema y número rojo ancho */
+    /* 4: Remolino caramelo rojo, dorado y crema (como la 7ª de la imagen) */
     .estilo-4 {
-      border: 6px solid transparent;
-      background:
-        linear-gradient(var(--crema), var(--crema)) padding-box,
-        repeating-linear-gradient(45deg, var(--verde) 0 6px, var(--crema) 6px 12px) border-box;
-      color: var(--rojo);
-      font-family: 'Alfa Slab One', serif;
-      transform: rotate(1.5deg);
+      background: repeating-conic-gradient(#a62c21 0deg 30deg, #e5bc63 30deg 34deg, #fdf6e7 34deg 56deg, #e5bc63 56deg 60deg);
+      font-family: 'Rye', serif;
+    }
+    .estilo-4::before { background-color: #fdf6e7; }
+    .estilo-4 .numero {
+      color: #fff6e0;
+      text-shadow: -1.5px -1.5px 0 #1e191a, 1.5px -1.5px 0 #1e191a, -1.5px 1.5px 0 #1e191a, 1.5px 1.5px 0 #1e191a, 0 3px 0 #1e191a;
     }
 
-    /* 5: Etiqueta con esquinas recortadas (octogonal) y borde rojo */
+    /* 5: Verde con rayas diagonales doradas (como la 4ª de la imagen) */
     .estilo-5 {
-      clip-path: polygon(16% 0%, 84% 0%, 100% 14%, 100% 86%, 84% 100%, 16% 100%, 0% 86%, 0% 14%);
-      background: var(--rojo);
-      padding: 4px;
-      color: var(--verde);
-      font-family: 'Cinzel', serif;
-      font-weight: 900;
+      background: repeating-linear-gradient(-45deg, #2c5e3b, #2c5e3b 11px, #e5bc63 11px, #e5bc63 14px);
+      font-family: 'Corben', serif;
+      font-weight: 700;
     }
-    .estilo-5 {
-      background-color: var(--crema);
-      border: 4px solid var(--rojo);
-      outline: 2px dashed var(--dorado);
-      outline-offset: -7px;
-      color: var(--verde);
-      font-family: 'Cinzel', serif;
-      font-weight: 900;
+    .estilo-5 .numero {
+      color: #18633d;
+      text-shadow: -1.5px -1.5px 0 #ffffff, 1.5px -1.5px 0 #ffffff, -1.5px 1.5px 0 #ffffff, 1.5px 1.5px 0 #ffffff, 0 2.5px 0 #1e191a;
     }
 
-    /* 6: Fondo rojo envejecido con recuadro interior crema y número verde bloque */
+    /* 6: Roja y verde dividida con banda dorada (como la 5ª de la imagen) */
     .estilo-6 {
-      background-color: var(--rojo);
-      border-radius: 8px;
-      padding: 7px;
-      color: var(--verde-oscuro);
-      font-family: 'Alfa Slab One', serif;
-      transform: rotate(-1deg);
+      background: linear-gradient(180deg, #a62c21 62%, #e5bc63 63%, #e5bc63 70%, #2c5e3b 71%);
+      font-family: 'Special Elite', monospace;
     }
-   .estilo-6 {
-      background-color: var(--rojo);
-      border: 4px solid var(--dorado);
-      color: var(--crema);
-      font-family: 'Alfa Slab One', serif;
-      text-shadow: 2px 2px 0 var(--verde-oscuro);
-      transform: rotate(-1deg);
+    .estilo-6::before { background-color: #fdf6e7; }
+    .estilo-6 .numero {
+      color: #ffd166;
+      text-shadow: -1.5px -1.5px 0 #7a0618, 1.5px -1.5px 0 #7a0618, -1.5px 1.5px 0 #7a0618, 1.5px 1.5px 0 #7a0618;
     }
 
-    /* 7: Número rojo con sombra 3D negra y borde fino oscuro */
+    /* 7: Verde con franjas rojas curvas y lazo rojo (como la 6ª de la imagen) */
     .estilo-7 {
-      border: 2px solid var(--verde-oscuro);
-      color: var(--rojo);
+      background: repeating-linear-gradient(15deg, #2c5e3b, #2c5e3b 12px, #a62c21 12px, #a62c21 22px);
       font-family: 'Alfa Slab One', serif;
-      text-shadow: 3px 3px 0px var(--verde-oscuro);
-      transform: rotate(1.2deg);
+    }
+    .estilo-7::before {
+      width: 34px; height: 11px; top: -11px;
+      background: linear-gradient(90deg, #a62c21 42%, #1b1918 43%, #1b1918 57%, #a62c21 58%);
+      border-radius: 4px;
+    }
+    .estilo-7 .numero {
+      color: #b80d29;
+      text-shadow: -2px -2px 0 #ffffff, 2px -2px 0 #ffffff, -2px 2px 0 #ffffff, 2px 2px 0 #ffffff;
     }
 
-    /* 8: Marco ornamental rojo y número verde */
+    /* 8: Verde con zigzag dorado y lazo dorado (como la 8ª de la imagen) */
     .estilo-8 {
-      border: 5px double var(--rojo);
-      outline: 2px dashed var(--rojo);
-      outline-offset: -8px;
-      color: var(--verde);
-      font-family: 'Rye', serif;
-      transform: rotate(-1.5deg);
-    }
-
-    /* 9: Marco de cuadros escoceses (gingham) verdes y número rojo */
-    .estilo-9 {
-      border: 7px solid transparent;
-      background:
-        linear-gradient(var(--crema), var(--crema)) padding-box,
-        repeating-conic-gradient(var(--verde) 0% 25%, #0d2b1b 0% 50%) 0 0 / 10px 10px border-box;
-      color: var(--rojo);
-      font-family: 'Playfair Display', serif;
-      font-weight: 900;
-    }
-
-    /* 10: Etiqueta clásica crema con borde rojo fino y número verde grande */
-    .estilo-10 {
-      border: 3px solid var(--rojo);
-      color: var(--verde);
-      font-family: 'Cinzel', serif;
-      font-weight: 900;
-      transform: rotate(1deg);
-    }
-
-    /* 11: Octágono con doble línea verde y líneas de libreta */
-    .estilo-11 {
-      clip-path: polygon(18% 0%, 82% 0%, 100% 18%, 100% 82%, 82% 100%, 18% 100%, 0% 82%, 0% 18%);
-      background: repeating-linear-gradient(to bottom, var(--crema) 0px, var(--crema) 14px, #c9bca6 15px);
-      border: 3px solid var(--verde);
-      color: var(--rojo);
-      font-family: 'Playfair Display', serif;
-      font-weight: 900;
-    }
-
-    /* 12: Marco tartán rojo y negro con número verde */
-    .estilo-12 {
-      border: 6px solid transparent;
-      background:
-        linear-gradient(var(--crema), var(--crema)) padding-box,
-        repeating-conic-gradient(var(--rojo) 0% 25%, #222 0% 50%) 0 0 / 10px 10px border-box;
-      color: var(--verde-oscuro);
-      font-family: 'Special Elite', monospace;
-      font-weight: bold;
-      transform: rotate(-1.2deg);
-    }
-
-    /* 13: Etiqueta ovalada con doble borde verde y número rojo */
-    .estilo-13 {
-      border-radius: 50%;
-      border: 4px solid var(--verde);
-      box-shadow: inset 0 0 0 3px var(--crema), inset 0 0 0 5px var(--verde);
-      color: var(--rojo);
-      font-family: 'Rye', serif;
-    }
-
-    /* 14: Borde bastón de caramelo (rayas rojas y blancas) y número verde */
-    .estilo-14 {
-      border: 6px solid transparent;
-      background:
-        linear-gradient(var(--crema), var(--crema)) padding-box,
-        repeating-linear-gradient(90deg, var(--rojo) 0 7px, var(--crema) 7px 14px) border-box;
-      color: var(--verde);
-      font-family: 'Cinzel', serif;
-      font-weight: 900;
-      transform: rotate(1.5deg);
-    }
-
-    /* 15: Bola de cuadritos verde menta con número rojo */
-    .estilo-15 {
-      background: repeating-conic-gradient(#012d14 0% 25%, var(--crema) 0% 50%) 0 0 / 10px 10px;
-      border: 4px solid var(--verde);
-      color: var(--rojo);
-      font-family: 'Playfair Display', serif;
-      font-weight: 900;
-      text-shadow: 1px 1px 0 var(--crema), -1px -1px 0 var(--crema);
-    }
-.estilo-15 {
-      background: repeating-conic-gradient(#7aa38c 0% 25%, var(--crema) 0% 50%) 0 0 / 10px 10px;
-      border: 4px solid var(--verde);
-      color: var(--rojo);
-      font-family: 'Playfair Display', serif;
-      font-weight: 900;
-      text-shadow: 1px 1px 0 var(--crema), -1px -1px 0 var(--crema);
-    }
-
-    /* 16: Fondo rayado diagonal rojo/crema y borde verde */
-    .estilo-16 {
-      background: repeating-linear-gradient(45deg, var(--crema) 0 5px, #d99b8c 5px 8px);
-      border: 4px solid var(--verde-oscuro);
-      color: var(--verde-oscuro);
-      font-family: 'Playfair Display', serif;
-      font-style: italic;
-      font-weight: 900;
-      text-shadow: 1px 1px 0 var(--crema);
-      transform: rotate(-1deg);
-    }
-
-    /* 17: Borde punteado verde estilo sello y número rojo con sombra */
-    .estilo-17 {
-      border: 4px dotted var(--verde);
-      color: var(--rojo);
-      font-family: 'Alfa Slab One', serif;
-      text-shadow: 2px 2px 0 var(--verde-oscuro);
-    }
-
-    /* 18: Etiqueta roja intensa con borde crema y número verde rodeado */
-    .estilo-18 {
-      background-color: var(--rojo);
-      border: 4px solid var(--crema);
-      color: var(--verde-oscuro);
-      font-family: 'Alfa Slab One', serif;
-      text-shadow: -1px -1px 0 var(--crema), 1px -1px 0 var(--crema), -1px 1px 0 var(--crema), 1px 1px 0 var(--crema);
-      transform: rotate(1.5deg);
-    }
-
-    /* 19: Etiqueta roja estilo escudo antiguo con número perfilado */
-    .estilo-19 {
-      background: radial-gradient(circle, var(--rojo) 60%, var(--rojo-oscuro) 100%);
-      border-radius: 18px 18px 28px 28px;
-      border: 3px double var(--crema);
-      color: var(--crema);
-      font-family: 'Cinzel', serif;
-      font-weight: 900;
-    }
-
-    /* 20: Rayas diagonales verdes en el marco y número rojo texturizado */
-    .estilo-20 {
-      border: 6px solid transparent;
-      background:
-        linear-gradient(var(--crema), var(--crema)) padding-box,
-        repeating-linear-gradient(-45deg, var(--verde) 0 6px, var(--crema) 6px 12px) border-box;
-      color: var(--rojo);
-      font-family: 'Rye', serif;
-      transform: rotate(-1.5deg);
-    }
-
-    /* 21: Marco vichy (cuadritos) rojo y blanco con número verde */
-    .estilo-21 {
-      border: 6px solid transparent;
-      background:
-        linear-gradient(var(--crema), var(--crema)) padding-box,
-        repeating-conic-gradient(var(--rojo) 0% 25%, #f7d6d4 0% 50%) 0 0 / 8px 8px border-box;
-      color: var(--verde-oscuro);
-      font-family: 'Special Elite', monospace;
-      font-weight: bold;
-    }
-
-    /* 22: Marco vichy verde brillante con número rojo */
-    .estilo-22 {
-      border: 6px solid transparent;
-      background:
-        linear-gradient(var(--crema), var(--crema)) padding-box,
-        repeating-conic-gradient(#2e7d4b 0% 25%, #bde3c9 0% 50%) 0 0 / 8px 8px border-box;
-      color: var(--rojo);
-      font-family: 'Playfair Display', serif;
-      font-weight: 900;
-      transform: rotate(1deg);
-    }
-
-    /* 23: Óvalo con borde punteado rojo y número verde fino */
-    .estilo-23 {
-      border-radius: 50%;
-      border: 4px dashed var(--rojo);
-      color: var(--verde);
+      background-color: #2c5e3b;
+      background-image:
+        linear-gradient(135deg, #e5bc63 25%, transparent 25%),
+        linear-gradient(225deg, #e5bc63 25%, transparent 25%);
+      background-position: 10px 0, 10px 0;
+      background-size: 20px 20px;
       font-family: 'Cinzel', serif;
       font-weight: 700;
-      transform: rotate(-1deg);
+    }
+    .estilo-8::before {
+      width: 34px; height: 11px; top: -11px;
+      background: linear-gradient(90deg, #e5bc63 42%, #1b1918 43%, #1b1918 57%, #e5bc63 58%);
+      border-radius: 4px;
+    }
+    .estilo-8 .numero {
+      color: #ffffff;
+      text-shadow: -1.5px -1.5px 0 #7a0618, 1.5px -1.5px 0 #7a0618, -1.5px 1.5px 0 #7a0618, 1.5px 1.5px 0 #7a0618;
     }
 
-    /* 24: Gran etiqueta final de Nochebuena con doble marco dorado/verde y número rojo */
-    .estilo-24 {
-      border: 4px solid var(--verde);
-      box-shadow: inset 0 0 0 3px var(--dorado), 0 6px 14px rgba(0,0,0,0.4);
-      color: var(--rojo);
-      font-family: 'Rye', serif;
-      transform: rotate(1deg);
+    /* 9: Roja con lunares crema y dorados */
+    .estilo-9 {
+      background-color: #a62c21;
+      background-image: radial-gradient(#fdf6e7 2px, transparent 2px), radial-gradient(#e5bc63 2px, #a62c21 2px);
+      background-size: 24px 24px;
+      background-position: 0 0, 12px 12px;
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
     }
+     .estilo-9 .numero {
+      color: #c8102e;
+    }
+
+    /* 10: Dorada cálida con lunares rojos y verdes */
+    .estilo-10 {
+      background-color: #e5bc63;
+      background-image: radial-gradient(#a62c21 2.2px, transparent 2.2px), radial-gradient(#2c5e3b 2.2px, #e5bc63 2.2px);
+      background-size: 22px 22px;
+      background-position: 0 0, 11px 11px;
+      font-family: 'Rye', serif;
+    }
+    .estilo-10::before { background-color: #a62c21; }
+    .estilo-10 .numero {
+      color: #ff9933;
+      text-shadow: -1.5px -1.5px 0 #1e191a, 1.5px -1.5px 0 #1e191a, -1.5px 1.5px 0 #1e191a, 1.5px 1.5px 0 #1e191a, 0 3px 0 #1e191a;
+    }
+
+    /* 11: Verde pino con lunares dorados */
+    .estilo-11 {
+      background-color: #2c5e3b;
+      background-image: radial-gradient(#e5bc63 2px, transparent 2px);
+      background-size: 16px 16px;
+      font-family: 'Corben', serif;
+      font-weight: 700;
+    }
+    .estilo-11 .numero {
+      color: #163a52;
+      text-shadow: -2px -2px 0 #ffffff, 2px -2px 0 #ffffff, -2px 2px 0 #ffffff, 2px 2px 0 #ffffff, 0 3px 0 #1e191a;
+    }
+
+    /* 12: Remolino inverso verde, dorado y crema */
+    .estilo-12 {
+      background: repeating-conic-gradient(#2c5e3b 0deg 30deg, #e5bc63 30deg 34deg, #fdf6e7 34deg 56deg, #e5bc63 56deg 60deg);
+      font-family: 'Special Elite', monospace;
+    }
+     .estilo-12 .numero {
+      color: #134d2f;
+      text-shadow: -1.5px -1.5px 0 #fffaf0, 1.5px -1.5px 0 #fffaf0, -1.5px 1.5px 0 #fffaf0, 1.5px 1.5px 0 #fffaf0, 0 3px 0 #1e191a;
+    }
+
+    /* 13: Roja ladrillo con franjas horizontales doradas */
+    .estilo-13 {
+      background: repeating-linear-gradient(0deg, #a62c21, #a62c21 14px, #e5bc63 14px, #e5bc63 18px);
+      font-family: 'Cinzel', serif;
+      font-weight: 900;
+    }
+    .estilo-13 .numero {
+      color: #fff8eb;
+      text-shadow: -2px -2px 0 #1e191a, 2px -2px 0 #1e191a, -2px 2px 0 #1e191a, 2px 2px 0 #1e191a, 0 3px 0 #1e191a;
+    }
+
+    /* 14: Verde con lazo rojo y centro crema */
+    .estilo-14 {
+      background: radial-gradient(circle, #2c5e3b 52%, #e5bc63 54%, #e5bc63 60%, #a62c21 62%);
+      font-family: 'Alfa Slab One', serif;
+    }
+    .estilo-14::before {
+      width: 34px; height: 11px; top: -11px;
+      background: linear-gradient(90deg, #a62c21 42%, #1b1918 43%, #1b1918 57%, #a62c21 58%);
+      border-radius: 4px;
+    }
+    .estilo-14 .numero {
+      color: #d63229;
+      text-shadow: -1.5px -1.5px 0 #ffffff, 1.5px -1.5px 0 #ffffff, -1.5px 1.5px 0 #ffffff, 1.5px 1.5px 0 #ffffff, 0 3px 0 #1e191a;
+    }
+
+    /* 15: Crema vintage con lunares rojos y verdes */
+    .estilo-15 {
+      background: linear-gradient(180deg, #c8102e 24%, #ffffff 25%, #ffffff 39%, #c8102e 40%, #c8102e 60%, #ffffff 61%, #ffffff 75%, #c8102e 76%);
+      font-family: 'Special Elite', monospace;
+      font-weight: bold;
+    }
+    .estilo-15 .numero {
+      color: #ffd166;
+      text-shadow: -1.5px -1.5px 0 #7a0618, 1.5px -1.5px 0 #7a0618, -1.5px 1.5px 0 #7a0618, 1.5px 1.5px 0 #7a0618;
+    }
+
+    /* 16: Roja con rayas diagonales crema y doradas */
+    .estilo-16 {
+      background: repeating-linear-gradient(45deg, #a62c21, #a62c21 12px, #e5bc63 12px, #e5bc63 15px, #fdf6e7 15px, #fdf6e7 21px, #e5bc63 21px, #e5bc63 24px);
+      font-family: 'Rye', serif;
+    }
+    .estilo-16 .numero {
+      color: #18633d;
+      text-shadow: -1.5px -1.5px 0 #18633d, 1.5px -1.5px 0#18633d, -1.5px 1.5px 0 #ffffff, 1.5px 1.5px 0 #ffffff, 0 2.5px 0 #1e191a;
+    }
+
+    /* 17: Verde pino con banda central roja y borde dorado */
+    .estilo-17 {
+      background: linear-gradient(180deg, #2c5e3b 32%, #e5bc63 33%, #e5bc63 38%, #a62c21 39%, #a62c21 61%, #e5bc63 62%, #e5bc63 67%, #2c5e3b 68%);
+      font-family: 'Corben', serif;
+      font-weight: 700;
+    }
+    .estilo-17 .numero {
+      color: #ffffff;
+    }
+
+    /* 18: Roja con lazo dorado arriba */
+    .estilo-18 {
+      background-color: #a62c21;
+      background-image: radial-gradient(#e5bc63 1.8px, transparent 1.8px);
+      background-size: 16px 16px;
+      font-family: 'Special Elite', monospace;
+    }
+    .estilo-18::before {
+      width: 34px; height: 11px; top: -11px;
+      background: linear-gradient(90deg, #e5bc63 42%, #1b1918 43%, #1b1918 57%, #e5bc63 58%);
+      border-radius: 4px;
+    }
+    .estilo-18 .numero {
+      color: #b5e6ff;
+      text-shadow: -1.5px -1.5px 0 #1e191a, 1.5px -1.5px 0 #1e191a, -1.5px 1.5px 0 #1e191a, 1.5px 1.5px 0 #1e191a, 0 3px 0 #1e191a;
+    }
+
+    /* 19: Dorada con franjas verdes curvas */
+    .estilo-19 {
+      background: repeating-linear-gradient(-30deg, #e5bc63, #e5bc63 11px, #2c5e3b 11px, #2c5e3b 21px);
+      font-family: 'Cinzel', serif;
+      font-weight: 900;
+    }
+    .estilo-19 .numero {
+      color: #b8251e;
+      text-shadow: -1.5px -1.5px 0 #ffffff, 1.5px -1.5px 0 #ffffff, -1.5px 1.5px 0 #ffffff, 1.5px 1.5px 0 #ffffff, 0 3px 0 #1e191a;
+    }
+
+    /* 20: Verde con anillos concéntricos dorados */
+    .estilo-20 {
+      background: repeating-radial-gradient(circle, #2c5e3b, #2c5e3b 9px, #e5bc63 9px, #e5bc63 12px);
+      font-family: 'Alfa Slab One', serif;
+    }
+    .estilo-20 .numero {
+      color: #ff9933;
+      text-shadow: -1.5px -1.5px 0 #1e191a, 1.5px -1.5px 0 #1e191a, -1.5px 1.5px 0 #1e191a, 1.5px 1.5px 0 #1e191a, 0 3px 0 #1e191a;
+    }
+
+    /* 21: Roja con cuadritos vichy rojos y crema */
+    .estilo-21 {
+      background: repeating-conic-gradient(#a62c21 0% 25%, #f3e4c8 0% 50%) 0 0 / 16px 16px;
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+    }
+    .estilo-21 .numero {
+      color: #c48400;
+      text-shadow: -1.5px -1.5px 0 #ffffff, 1.5px -1.5px 0 #ffffff, -1.5px 1.5px 0 #ffffff, 1.5px 1.5px 0 #ffffff;
+    }
+
+    /* 22: Verde con lazo rojo y rayas horizontales doradas */
+    .estilo-22 {
+      background: repeating-linear-gradient(0deg, #2c5e3b, #2c5e3b 13px, #e5bc63 13px, #e5bc63 16px);
+      font-family: 'Rye', serif;
+    }
+    .estilo-22::before {
+      width: 34px; height: 11px; top: -11px;
+      background: linear-gradient(90deg, #a62c21 42%, #1b1918 43%, #1b1918 57%, #a62c21 58%);
+      border-radius: 4px;
+    }
+     .estilo-22 .numero {
+      color: #c8102e;
+    }
+
+    /* 23: Remolino rojo y verde con líneas doradas */
+    .estilo-23 {
+      background: repeating-conic-gradient(#a62c21 0deg 28deg, #e5bc63 28deg 32deg, #2c5e3b 32deg 60deg);
+      font-family: 'Corben', serif;
+      font-weight: 700;
+    }
+    .estilo-23 .numero {
+      color: #b80d29;
+      text-shadow: -2px -2px 0 #ffffff, 2px -2px 0 #ffffff, -2px 2px 0 #ffffff, 2px 2px 0 #ffffff;
+    }
+
+    /* 24: Especial Nochebuena - Roja y dorada con doble aro */
+    .estilo-24 {
+      background: radial-gradient(circle, #a62c21 56%, #e5bc63 58%, #e5bc63 72%, #2c5e3b 74%);
+      font-family: 'Cinzel', bold;
+      font-weight: 900;
+    }
+    .estilo-24::before {
+      width: 34px; height: 11px; top: -11px;
+      background: linear-gradient(90deg, #e5bc63 42%, #1b1918 43%, #1b1918 57%, #e5bc63 58%);
+      border-radius: 4px;
+    }
+    .estilo-24 .numero {
+      color: #18633d;
+      text-shadow: -1.5px -1.5px 0 #ffffff, 1.5px -1.5px 0 #ffffff, -1.5px 1.5px 0 #ffffff, 1.5px 1.5px 0 #ffffff, 0 2.5px 0 #1e191a;
+    }
+
+      
 
     /* ==========================================================
        VENTANA EMERGENTE (MODAL)
@@ -597,11 +908,68 @@
       color: #5c5346;
       font-size: 0.8rem;
     }
+    /* Selector de vista de pantalla */
+    .selector-vista {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin: 10px auto 15px;
+      flex-wrap: wrap;
+    }
+
+    .selector-vista button {
+      background-color: var(--crema);
+      color: var(--verde-oscuro);
+      border: 2px solid var(--verde);
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-family: inherit;
+      font-size: 0.85rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .selector-vista button.activo,
+    .selector-vista button:hover {
+      background-color: var(--verde);
+      color: var(--crema);
+    }
+
+    /* Modos forzados desde el botón */
+    body.vista-tablet .arbol-wrapper { max-width: 650px; }
+    body.vista-movil .arbol-wrapper { max-width: 370px; }
+
+    /* Estilos compactos para pantalla móvil (automático o con botón) */
+    @media (max-width: 520px) {
+      body { padding: 15px 6px 40px; }
+      .estrella-punta { width: 72px; height: 72px; margin-bottom: -18px; }
+      .estrella-punta span { font-size: 1.15rem; }
+      .cuerpo-arbol { padding: 28px 8px 24px; gap: 10px; }
+      .casilla { margin-top: 8px; border-width: 3px !important; }
+      .casilla::before { top: -8px; width: 12px; height: 8px; }
+      .tronco-arbol { width: 65px; height: 60px; margin-top: -32px; }
+      .modal-caja { padding: 22px 16px; max-height: 82vh; }
+    }
+
+    body.vista-movil .estrella-punta { width: 72px; height: 72px; margin-bottom: -18px; }
+    body.vista-movil .estrella-punta span { font-size: 1.15rem; }
+    body.vista-movil .cuerpo-arbol { padding: 28px 8px 24px; gap: 10px; }
+    body.vista-movil .casilla { width: 46px; height: 46px; margin-top: 8px; border-width: 3px !important; }
+    body.vista-movil .casilla .numero { font-size: 1.1rem; }
+    body.vista-movil .casilla::before { top: -8px; width: 12px; height: 8px; }
+    body.vista-movil .tronco-arbol { width: 65px; height: 60px; margin-top: -32px; }
+
   </style>
 </head>
 <body>
-
+    
   <header>
+    <div class="selector-vista">
+    <button id="btn-pc" class="activo" onclick="cambiarVista('pc')">💻 Ordenador</button>
+    <button id="btn-tablet" onclick="cambiarVista('tablet')">📱 Tablet</button>
+    <button id="btn-movil" onclick="cambiarVista('movil')">📲 Móvil</button>
+  </div>
     <h1>Feliz Navidad. Te quiero mucho <3 </h1>
     <p>Abre una bolica cada día hasta Navidad</p>
   </header>
@@ -626,52 +994,8 @@
   <div class="controles-pie">
     <button onclick="reiniciarProgreso()">Cerrar casillas abiertas (modo prueba)</button>
   </div>
-/* ==========================================================
-       ADAPTACIÓN ESPECÍFICA PARA MÓVILES (pantallas < 520px)
-       ========================================================== */
-    @media (max-width: 520px) {
-      body {
-        padding: 15px 6px 40px;
-      }
 
-      .estrella-punta {
-        width: 72px;
-        height: 72px;
-        margin-bottom: -18px;
-      }
-
-      .estrella-punta span {
-        font-size: 1.15rem;
-      }
-
-      .cuerpo-arbol {
-        padding: 28px 8px 24px;
-        gap: 10px;
-      }
-
-      .casilla {
-        margin-top: 8px;
-        border-width: 3px !important; /* Bordes un poco más finos para que luzca el número */
-      }
-
-      /* Capuchón dorado proporcional en móvil */
-      .casilla::before {
-        top: -8px;
-        width: 12px;
-        height: 8px;
-      }
-
-      .tronco-arbol {
-        width: 65px;
-        height: 60px;
-        margin-top: -32px;
-      }
-
-      .modal-caja {
-        padding: 22px 16px;
-        max-height: 82vh;
-      }
-    }
+      
   <script>
     /* ==========================================================
        1. CONFIGURACIÓN Y SORPRESAS DE LOS 24 DÍAS
@@ -704,7 +1028,7 @@
       { dia: 22, titulo: "Día Mundial del Termómetro", texto: "Escribe aquí tu sorpresa para el día 22." , imagen: "fotos/foto22.jpeg" },
       { dia: 23, titulo: "Víspera de Nochebuena", texto: "Prepara el gorro de Papá Noel, ¡mañana es el gran día!" , imagen: "fotos/foto23.jpeg" },
       { dia: 24, titulo: "Día de Nochebuena!", texto: "Gracias por abrir cada día conmigo. ¡Te quiero muchísimo!" , imagen: "fotos/foto24.png" },
-      { dia: 25, titulo: "Día de Navidad", texto: "Hoy si hay regalo! Ya puedes abrirlo (si no lo habías hecho ya...)", imagen: "fotos/foto25.jpg" }
+      { dia: 25, titulo: "Día de Navidad", texto: "Hoy si hay sopresa🫢 Ya puedes abrirlo (si no lo habías hecho ya...). Y esta foto es una pista!!", imagen: "fotos/foto25.jpg" }
   ]
 
     /* ==========================================================
@@ -809,6 +1133,21 @@
     }
 
     dibujarArbol();
+
+    function cambiarVista(modo) {
+      document.body.classList.remove('vista-tablet', 'vista-movil');
+      document.querySelectorAll('.selector-vista button').forEach(b => b.classList.remove('activo'));
+
+      if (modo === 'tablet') {
+        document.body.classList.add('vista-tablet');
+        document.getElementById('btn-tablet').classList.add('activo');
+      } else if (modo === 'movil') {
+        document.body.classList.add('vista-movil');
+        document.getElementById('btn-movil').classList.add('activo');
+      } else {
+        document.getElementById('btn-pc').classList.add('activo');
+      }
+    }
   </script>
 </body>
 </html>
