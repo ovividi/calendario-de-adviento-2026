@@ -828,10 +828,6 @@
     </div>
   </div>
 
-  <div class="controles-pie">
-    <button onclick="reiniciarProgreso()">Cerrar casillas abiertas (modo prueba)</button>
-  </div>
-
   <!-- VENTANA EMERGENTE PARA AVISOS Y CÓDIGO DE DESBLOQUEO -->
   <div id="modal-aviso" class="modal-fondo" onclick="if(event.target === this) cerrarAviso()">
     <div class="modal-caja">
@@ -857,7 +853,7 @@
     /* ==========================================================
        1. CONFIGURACIÓN Y SORPRESAS DE LOS 25 DÍAS
        ========================================================== */
-    const BLOQUEAR_POR_FECHA_REAL = false; // Cambia a "true" cuando lo termines de diseñar
+    const BLOQUEAR_POR_FECHA_REAL = true; // Cambia a "true" cuando lo termines de diseñar
     const MES_CALENDARIO = 11; // 11 = Diciembre en JavaScript
 
     const sorpresas = [
@@ -890,7 +886,7 @@
         imagen: "foto7.JPEG" },
 
       { dia: 8,  titulo: "Día de la Virgen",
-        texto: "\n\nT quiero mucho <3 Nos vemos mañana",
+        texto: "Otra vez tuve que repetir viaje. Que difícil encontrar fotos!!\n\n Por no volver a hablar del lujo, hoy hablaremos sobre el tiempo.\n\n El tiempo que ha pasado entre nosotras. Hemos cambiado mucho desde que nos conocimos, y me encantaría poder seguir cambiando y creciendo de tu mano. \n\n Lo pienso muchísimas veces, aunque soy plenamente consciente de que el amor va cambiando y que no siempre sirve querer para estar juntas, por mi parte, por mucho tiempo que pase, te prometo hacer todo lo que esté entre mis posibilidad para poder seguir queriéndonos durante mucho tiempo (sin que sea negativo para ninguna obvio) porque no concibo una vida en la que no estés a mi lado. \n\nT quiero mucho <3 Nos vemos mañana",
         imagen: "foto8.JPEG" },
 
       { dia: 9,  titulo: "Día Internacional contra la Corrupción",
@@ -906,43 +902,43 @@
         imagen: "foto11.JPEG" },
 
       { dia: 12, titulo: "Día Internacional de la Cobertura",
-        texto: "\n\nT quiero mucho <3 Nos vemos mañana",
+        texto: "Siempre pensé que esta foto nos representa tanto. \n\n Digo que nos representa porque vamos iguales pero completamente al revés, y la verdad que ninguna nos dimos cuenta.\n\n Porque creo que somos muy diferentes en muchas cosas, pero dentro de esas diferencias, la verdad que no somos tan diferentes, lo cual podría parecer una incongruencia pero para mi no lo es tanto. \n\n Y es algo que me encanta de nosotras, el saber encontrar la igualdad en la diferencia, siempre me gusta pensar en nosotras como si fuésemos la luna y el sol (no se porque la verdad).\n\n Y creo que es algo bastante especial porque desde entonces, cuando miro al cielo me acuerdo de ti, y m acuerdo de una frase de una canción de Fedez que diría en castellano -Separadas somos estrellas, pero juntas somos el sol-. \n\nT quiero mucho <3 Nos vemos mañana",
         imagen: "foto12.JPEG" },
 
       { dia: 13, titulo: "Día Internacional del Canto Coral",
-        texto: "\n\nT quiero mucho <3 Nos vemos mañana",
+        texto: "Ni idea de cuando es esta foto la verdad.\n\n Pero diría que es en mi habitación, me gusta esta foto pero sales riendo y me encanta verte reír. \n\n Aunque nunca te rías de mis chistes porque nunca te hacen gracia, me gusta pensar que el fondo crees que soy un poco graciosa (me duele en el ego pensar que no lo crees, lo siento). \n\n Y aunque tu creas que yo nunca me rio contigo, eres la persona con la que mejor me lo paso de verdad (no eres el club de la comedia, pero tampoco lo soportaría si lo fueses), me encanta pasar tiempo a tu lado y eres mucho mucho más divertida de lo que tu crees, solo que crees muy poco en ti misma y no t dejas verlo.\n\nT quiero mucho <3 Nos vemos mañana",
         imagen: "foto13.JPEG" },
 
       { dia: 14, titulo: "Día Mundial del Mono (tu día)",
-        texto: "\n\nT quiero mucho <3 Nos vemos mañana",
+        texto: "Mi primer día de pelirroja!!\n\n 26 de diciembre 2024, dando un paseo por Valencia viendo las luces de navidad. \n\n La verdad que a mi nunca me había gustado eso, pero de verdad que contigo hasta m apetece cada año (aunque a veces puedas no creerlo), porque por mucho que me agobié la gente, yo te miro a los ojos y encuentro paz. \n\n No se que química de mi cerebro alteraste para conseguir que yo quiera ir a ver lucecitas de navidad, pero gracias por hacerlo, aunque nunca iría sin ti, no sería lo mismo. \n\n Me encantaría seguir viendote ver tan feliz las luces de Navidad a mi lado toda una vida entera.\n\nT quiero mucho <3 Nos vemos mañana",
         imagen: "foto14.JPEG" },
 
       { dia: 15, titulo: "Día Mundial del Otaku (ugh)",
-        texto: "\n\nT quiero mucho <3 Nos vemos mañana",
+        texto: "Esta foto se parece mucho a la del día 13 la verdad.\n\n Si no mal recuerdo fue cuando pasó todo lo de la dana, en el bus que iba a Valencia que fuimos al cine a ver Vaiana2 (CREO).\n\n No  m acuerdo bien de ese día pero a lo largo de nuestra vida, habrá muchos días que no recuerde bien pero aun cosa tengo clara, aunque no todos los días sean para el recuerdo, siempre soy geniales a tu lado y aunque estos mensajes ya suenen repetitivos, es que no encuentro más formas de expresar lo mucho que te quiero (nunca fui una mujer de palabras). \n\nT quiero mucho <3 Nos vemos mañana",
         imagen: "foto15.JPEG" },
 
       { dia: 16, titulo: "Día del nacimiento de Beethoven",
-        texto: "\n\nT quiero mucho <3 Nos vemos mañana",
+        texto: "Un día cualquiera de verano.\n\n Aunque verano suele ser un tiempo complicado por mi culpa, porque nunca estoy, pero igualmente creo que el verano guarda recuerdo muy especiales.\n\n Recuerdo la primera vez que fui al -camp- y conocí toooda tu familia, también fue en verano cuando quedamos por primera vez en benifaió, cuando tuvimos nuestra primera cita en la playa, cuando empezamos a salir, todo ocurre en verano al parecer. \n\n Y aunque pueda parecer que en verano no eres mi prioridad, me encantaría pasar lo veranos a tu lado y ojalá podamos vivir muchos veranos juntas. \n\nT quiero mucho <3 Nos vemos mañana",
         imagen: "foto16.JPEG" },
 
       { dia: 17, titulo: "Hoy no hay día de nada :(",
-        texto: "\n\nT quiero mucho <3 Nos vemos mañana",
+        texto: "Este día hicimos la flor que te regalé. \n\n No se porque m acuerdo tan bien de ese día, quizás porque junta dos cosas que me encantan, los legos y tu. \n\n Se que probablemente tu no quieras hacer nunca más un lego conmigo porque se me da fatal hacerlo con gente, pero espero que no me odies por ello (ahora trabajo mucho mejor en equipo, aunque me sigue gustando ser el líder siempre). \n\n Me parece un plan tan sencillo y que me encantó tanto, que me hace recordar porque te quiero tanto, porque a tu lado, las cosas más sencillas se convierten en cosas increíbles.\n\nT quiero mucho <3 Nos vemos mañana",
         imagen: "foto17.JPEG" },
 
       { dia: 18, titulo: "Día del Jersey Navideño Feo",
-        texto: "\n\nT quiero mucho <3 Nos vemos mañana",
+        texto: "Despertar a tu lado. \n\n Por nuestras caras se intuye que acabamos de despertar y quiero que sepas que despertar a tu lado es de las mejores sensaciones que viví nunca. \n\n Para mi es precioso que seas lo primero que veo al despertar y no tener que enviarte un mensaje de buenos días (que no es que eso no me guste, pero prefiero darte los buenos días con un besito).\n\n Pienso cada día en lo maravilloso que sería despertar cada día a tu lado, espero que algún día se haga realidad.\n\nT quiero mucho <3 Nos vemos mañana",
         imagen: "foto18.JPEG" },
 
       { dia: 19, titulo: "Día Internacional del Emo",
-        texto: "\n\nT quiero mucho <3 Nos vemos mañana",
+        texto: "Navidad en Madrid.\n\n Aunque no durmiésemos allí, ese realmente fue nuestro primer viaje juntas de verdad (quitando Alemania siendo realistas).\n\n Para dormir trajiste tu funda de almohada y no se porque a mi me dejó ese pelo tieso, pero bueno obviémoslo. \n\n Fue la primera vez que vimos las luces de Navidad juntas y que chulo! \n\n Poder estar todo el día paseando a tu ladito, una fortuna. \n\n Tendremos que visitar más lugares navideños juntas...\n\nT quiero mucho <3 Nos vemos mañana",
         imagen: "foto19.JPEG" },
 
       { dia: 20, titulo: "Día de las Migas",
-        texto: "\n\nT quiero mucho <3 Nos vemos mañana",
+        texto: "De julio de 2023. \n\n No tengo ninguna foto del día que empezamos a salir, pero esta foto es de este mes así que me sirve para hablar de ello.\n\n Nunca creí que tu me fueses a pedir salir a mi, siempre pensé que esperarías a que yo t dijese algo, y aunque durante mucho tiempo dudé si en algún momento llegaría  pasar, pasó y que felicidad desde entonces. \n\n También recuerdo subir a la noria porque me dijiste que te hacía ilusión y yo pensé que sería super romántico y al final había dos guiris ahí (fatal) pero bueno, siempre podré decir que subí a la noria por primera vez con el amor de mi vida. \n\nT quiero mucho <3 Nos vemos mañana",
         imagen: "foto20.JPEG" },
 
       { dia: 21, titulo: "Día del solsticio de invierno",
-        texto: "\n\nT quiero mucho <3 Nos vemos mañana",
+        texto: "De mis fotos favoritas. Es un poco familia <3 \n\n Es un bereal mal recordado pero seguramente sea la única foto de las tres, estábamos yendo a la estación para que volvieses a tu casa, la verdad que me encantaba la rutina de quedar los viernes, cada semana en una casa. \n\n Yo la verdad no se como mis padres no sospechaban nada, porque eres la primera persona que yo invitaba a mi casa desde los 12 años, pero bueno, mejor. \n\n Recuerdo esa época de segunda de bachiller como con mucha ternura porque nos veo a las dos como muy bebés, como empezando todo por primera vez, no sé ajajja. \n\n Ha cambiado todo tanto desde entonces, y sobre todo que cada día t quiero más que el anterior.\n\nT quiero mucho <3 Nos vemos mañana",
         imagen: "foto21.png" },
 
       { dia: 22, titulo: "Día Mundial del Termómetro",
@@ -950,11 +946,11 @@
         imagen: "foto22.JPEG" },
 
       { dia: 23, titulo: "Víspera de Nochebuena",
-        texto: "\n\nT quiero mucho <3 Nos vemos mañana",
+        texto: "Me encanta esta foto.\n\n Es del día que fuimos a la playa y tu m regalaste una pulsera con un papelito que aun guardo porque me da mucha ternurita. \n\nJusto en esa playa tuvo lugar nuestra primera cita (de la cual no hay ninguna foto y fue terrible porque era el único día que la playa de valencia no era un lago y no se podía hacer paddel). \n\nRecuerdo todos esos momentos de una manera muy especial porque recuerdo ponerte TAN nerviosa cada vez que te iba a ver, que sinceramente, a veces aún me pasa, pero de una manera muy diferente (obvio). \n\nT quiero mucho <3 Nos vemos mañana",
         imagen: "foto23.JPEG" },
 
       { dia: 24, titulo: "Día de Nochebuena!",
-        texto: "Hoy es el último día de adviento\n\n Para esta ocasión he querido rescatar la primera foto que he encontrado que salimos las dos. No es para nada bonita ni mucho menos, pero creo que guardará para siempre un buen recuerdo. Aunque realmente ahí yo no pensase nada de lo que podría pasar, siento que siempre hubo algo especial. \n\n Nos tocó juntas en el avión (aunque fuese por el apellido) y si no fuese por eso, seguro que no estaríamos aquí, aun sigo pensando en lo raro que es que yo quisiera apoyar mi cabeza en tu hombro (no t conocía de nada) y lo raro que es que desde el primer día que hablamos de verdad (no en este viaje), yo ya sintiese que tu no ibas a ser una más (aunque no tenía nada claro, pero siempre me sorprenderá la sensación que tuve después de ese día, nunca sentí nada parecido).\n\nT quiero mucho <3 Nos vemos mañana",
+        texto: "Hoy es el último día de adviento :(\n\n Para esta ocasión he querido rescatar la primera foto que he encontrado que salimos las dos. No es para nada bonita ni mucho menos, pero creo que guardará para siempre un buen recuerdo. Aunque realmente ahí yo no pensase nada de lo que podría pasar, siento que siempre hubo algo especial. \n\n Nos tocó juntas en el avión (aunque fuese por el apellido) y si no fuese por eso, seguro que no estaríamos aquí, aun sigo pensando en lo raro que es que yo quisiera apoyar mi cabeza en tu hombro (no t conocía de nada) y lo raro que es que desde el primer día que hablamos de verdad (no en este viaje), yo ya sintiese que tu no ibas a ser una más (aunque no tenía nada claro, pero siempre me sorprenderá la sensación que tuve después de ese día, nunca sentí nada parecido).\n\nT quiero mucho <3 Nos vemos mañana",
         imagen: "foto24.png" },
 
       { dia: 25, titulo: "Feliz Navidad",
@@ -1041,14 +1037,14 @@
     function intentarAbrirCasilla(item) {
       if (BLOQUEAR_POR_FECHA_REAL) {
         const hoy = new Date();
-        const mesActual = 11; // CAMBIAR POR DIA Y MES ACTUAL
-        const diaActual = 6;
+        const mesActual = hoy.getMonth(); // CAMBIAR POR DIA Y MES ACTUAL
+        const diaActual = hoy.getDate();
 
         // 1. Aún no ha llegado el día -> Ventana bonita de aviso
         if (mesActual < MES_CALENDARIO || (mesActual === MES_CALENDARIO && diaActual < item.dia)) {
           mostrarVentanaAviso(
-            "¡Aún es pronto! 🎄",
-            `Todavía no toca abrir esta bolica.\n\nPodrás descubrir la sorpresa el ${item.dia} de diciembre. ✨`,
+            "Espera un poco!",
+            `Todavía no toca abrir esta bolica.\n\nPodrás abrirla el ${item.dia} de diciembre. ✨`,
             false
           );
           return;
