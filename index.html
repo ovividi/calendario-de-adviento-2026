@@ -62,39 +62,7 @@
       color: #6a0606;
     }
 
-    /* Selector de vista en columna vertical en el lateral izquierdo */
-    .selector-vista {
-      position: fixed;
-      top: 16px;
-      left: 14px;
-      z-index: 900;
-      display: flex;
-      flex-direction: column;
-      align-items: stretch;
-      gap: 8px;
-    }
-
-    .selector-vista button {
-      background-color: var(--crema);
-      color: var(--verde-oscuro);
-      border: 2px solid var(--verde);
-      padding: 7px 12px;
-      border-radius: 20px;
-      font-family: inherit;
-      font-size: 0.82rem;
-      font-weight: bold;
-      text-align: left;
-      cursor: pointer;
-      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
-      transition: all 0.2s ease;
-    }
-
-    .selector-vista button.activo,
-    .selector-vista button:hover {
-      background-color: var(--verde);
-      color: var(--crema);
-    }
-
+   
   
     /* Fila con el subtítulo y el botón Explicación al lado */
     .subtitulo-fila {
@@ -762,9 +730,7 @@
       font-size: 0.8rem;
     }
 
-    /* Modos forzados desde el botón */
-    body.vista-tablet .arbol-wrapper { max-width: 650px; }
-    body.vista-movil .arbol-wrapper { max-width: 370px; }
+   
 
     /* Estilos compactos para pantalla móvil (automático o con botón) */
     @media (max-width: 520px) {
@@ -778,25 +744,15 @@
       .modal-caja { padding: 22px 16px; max-height: 82vh; }
     }
 
-    body.vista-movil .estrella-punta { width: 72px; height: 72px; margin-bottom: -18px; }
-    body.vista-movil .estrella-punta span { font-size: 1.15rem; }
-    body.vista-movil .cuerpo-arbol { padding: 28px 8px 24px; gap: 10px; }
-    body.vista-movil .casilla { width: 46px; height: 46px; margin-top: 8px; border-width: 3px !important; }
-    body.vista-movil .casilla .numero { font-size: 1.1rem; }
-    body.vista-movil .casilla::before { top: -8px; width: 12px; height: 8px; }
-    body.vista-movil .tronco-arbol { width: 65px; height: 60px; margin-top: -32px; }
+   
   </style>
 </head>
 <body>
 
-  <header>
-    <div class="selector-vista">
-      <button id="btn-pc" class="activo" onclick="cambiarVista('pc')">💻 Ordenador</button>
-      <button id="btn-tablet" onclick="cambiarVista('tablet')">📱 Tablet</button>
-      <button id="btn-movil" onclick="cambiarVista('movil')">📲 Móvil</button>
-    </div>
-    <h1>El calendario de los recuerdos &lt;3</h1>
+ <header>
+    <h1>Feliz Navidad. Te quiero mucho &lt;3</h1>
     <div class="subtitulo-fila">
+      <p>Abre una bolica cada día hasta Navidad</p>
       <button class="btn-explicacion" onclick="abrirExplicacion()">❓ Explicación</button>
     </div>
   </header>
