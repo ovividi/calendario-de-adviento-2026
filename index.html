@@ -7,9 +7,7 @@
   <!-- Fuentes vintage de Google Fonts para variar las tipografías de cada casilla -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Cinzel:wght@700;900&family=Playfair+Display:ital,wght@0,700;0,900;1,800&family=Rye&family=Special+Elite&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Cinzel:wght@700;900&family=Playfair+Display:ital,wght@0,700;0,900;1,800&family=Rye&family=Special+Elite&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Corben:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Cinzel:wght@700;900&family=Corben:wght@400;700&family=Playfair+Display:ital,wght@0,700;0,900;1,800&family=Rye&family=Special+Elite&display=swap" rel="stylesheet">
 
   <style>
     :root {
@@ -29,12 +27,12 @@
     }
 
     body {
-      font-family: 'Corben', Corben, serif;
+      font-family: 'Corben', 'Segoe UI Emoji', 'Apple Color Emoji', 'Noto Color Emoji', serif;
       background-image: url("fondo.jpg");
-      background-size: cover;        /* Ajusta la imagen para cubrir toda la pantalla sin deformarse */
-      background-position: center;   /* Centra la imagen */
-      background-attachment: fixed;  /* Mantiene el fondo quieto al hacer scroll hacia abajo */
-      background-repeat: no-repeat;  /* Evita que la foto se repita en mosaico */
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      background-repeat: no-repeat;
       color: var(--verde-oscuro);
       margin: 0;
       padding: 20px 10px 50px;
@@ -63,6 +61,135 @@
       color: #6a0606;
     }
 
+    /* Selector de vista en columna vertical en el lateral izquierdo */
+    .selector-vista {
+      position: fixed;
+      top: 16px;
+      left: 14px;
+      z-index: 900;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 8px;
+    }
+
+    .selector-vista button {
+      background-color: var(--crema);
+      color: var(--verde-oscuro);
+      border: 2px solid var(--verde);
+      padding: 7px 12px;
+      border-radius: 20px;
+      font-family: inherit;
+      font-size: 0.82rem;
+      font-weight: bold;
+      text-align: left;
+      cursor: pointer;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+      transition: all 0.2s ease;
+    }
+
+    .selector-vista button.activo,
+    .selector-vista button:hover {
+      background-color: var(--verde);
+      color: var(--crema);
+    }
+
+  
+    /* Fila con el subtítulo y el botón Explicación al lado */
+    .subtitulo-fila {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .btn-explicacion {
+      background-color: var(--crema);
+      color: var(--rojo);
+      border: 2px solid var(--rojo);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-family: inherit;
+      font-size: 0.82rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-explicacion:hover {
+      background-color: var(--rojo);
+      color: var(--crema);
+    }
+
+    /* En móviles muy estrechos (< 650px), los hacemos más compactos para que no tapen el árbol */
+    @media (max-width: 650px) {
+      .selector-vista {
+        top: 10px;
+        left: 8px;
+        gap: 5px;
+      }
+      .selector-vista button {
+        padding: 5px 9px;
+        font-size: 0.72rem;
+      }
+    }
+
+    .selector-vista button {
+      background-color: var(--crema);
+      color: var(--verde-oscuro);
+    }
+    /* Campo y botón para introducir el código secreto dentro de la ventana */
+    .caja-codigo-input {
+      width: 85%;
+      padding: 10px 14px;
+      margin: 12px 0 6px;
+      border: 2.5px solid var(--rojo);
+      border-radius: 10px;
+      background-color: #ffffff;
+      color: var(--verde-oscuro);
+      font-family: 'Corben', serif;
+      font-size: 1rem;
+      text-align: center;
+      text-transform: uppercase;
+      outline: none;
+    }
+
+    .caja-codigo-input:focus {
+      border-color: var(--verde);
+      box-shadow: 0 0 0 3px rgba(11, 141, 74, 0.2);
+    }
+
+    .error-codigo {
+      color: var(--rojo-oscuro);
+      font-size: 0.85rem;
+      font-weight: bold;
+      margin: 4px 0 8px;
+      min-height: 20px;
+    }
+
+    .botones-codigo {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .boton-desbloquear {
+      background-color: var(--rojo);
+      color: var(--crema);
+      border: 2px solid var(--dorado);
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-family: 'Corben', serif;
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+
+    .boton-desbloquear:hover {
+      background-color: var(--rojo-oscuro);
+    }
+
     /* ==========================================================
        ESTRUCTURA DEL ÁRBOL DE NAVIDAD
        ========================================================== */
@@ -77,39 +204,34 @@
 
     /* Estrella dorada superior */
     .estrella-punta {
-  width: 96px;
-  height: 96px;
-  background: linear-gradient(135deg, #f5d76e, #d4af37, #aa821c);
-  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  margin-bottom: -24px;
-  z-index: 6;
-  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.35));
-  transition: transform 0.25s ease;
-}
+      width: 96px;
+      height: 96px;
+      background: linear-gradient(135deg, #f5d76e, #d4af37, #aa821c);
+      clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      margin-bottom: -24px;
+      z-index: 6;
+      filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.35));
+      transition: transform 0.25s ease;
+    }
 
-.estrella-punta:hover {
-  transform: scale(1.12);
-}
+    .estrella-punta:hover {
+      transform: scale(1.12);
+    }
 
-.estrella-punta span {
-  font-family: 'Corben', serif;
-  font-weight: 900;
-  font-size: 1.45rem;
-  color: var(--rojo-oscuro);
-  margin-top: 8px;
-}
+    .estrella-punta span {
+      font-family: 'Corben', serif;
+      font-weight: 900;
+      font-size: 1.45rem;
+      color: var(--rojo-oscuro);
+      margin-top: 8px;
+    }
 
-.estrella-punta.abierta {
-  filter: sepia(0.35) brightness(0.92) drop-shadow(0 4px 10px rgba(0, 0, 0, 0.35));
-}
-
-    @keyframes brilloEstrella {
-      from { transform: scale(1) rotate(-3deg); }
-      to { transform: scale(1.06) rotate(3deg); }
+    .estrella-punta.abierta {
+      filter: sepia(0.35) brightness(0.92) drop-shadow(0 4px 10px rgba(0, 0, 0, 0.35));
     }
 
     /* Silueta verde del árbol detrás de las casillas */
@@ -124,7 +246,6 @@
       z-index: 2;
     }
 
-    /* Fondo verde con forma de pino escalonado */
     .cuerpo-arbol::before {
       content: "";
       position: absolute;
@@ -155,55 +276,36 @@
       width: 100%;
     }
 
-
     /* Tronco inferior del árbol */
     .tronco-arbol {
       width: 90px;
-      height: 95px; /* Más alto para que siga viéndose largo por debajo */
+      height: 95px;
       background: linear-gradient(90deg, #472b17, #6b4427, #472b17);
       border-radius: 0 0 8px 8px;
-      margin-top: -55px; /* Sube el tronco para que quede metido detrás de la base del árbol */
+      margin-top: -55px;
       box-shadow: 0 8px 15px rgba(0,0,0,0.2);
       z-index: 1;
     }
+
     /* ==========================================================
-       ESTILO BASE DE CADA ETIQUETA / CASILLA
+       ESTILO BASE ILUSTRADO PARA TODAS LAS BOLAS
        ========================================================== */
-   /* Estilo base de cada bola de Navidad */
     .casilla {
-      width: clamp(60px, 14vw, 96px);
-      height: clamp(60px, 14vw, 96px); /* Mismo ancho y alto para que sea un círculo perfecto */
-      border-radius: 50% !important;    /* Fuerza la forma redonda en todos los estilos */
-      clip-path: none !important;       /* Quita los recortes octogonales antiguos */
-      background-color: var(--crema);
+      width: clamp(46px, 13.5vw, 94px);
+      height: clamp(46px, 13.5vw, 94px);
+      border-radius: 50% !important;
+      clip-path: none !important;
+      border: 3px solid #1b1918 !important;
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
       cursor: pointer;
       user-select: none;
       position: relative;
-      margin-top: 12px;                 /* Deja espacio arriba para el enganche de la bola */
+      margin-top: 14px;
       transition: transform 0.22s ease, box-shadow 0.22s ease;
-      box-shadow: inset -6px -8px 14px rgba(0, 0, 0, 0.22), 
-                  inset 5px 5px 10px rgba(218, 152, 44, 0.65),
-                  0 6px 12px rgba(0, 0, 0, 0.38);
-      overflow: visible;                /* Permite que se vea el capuchón dorado por fuera */
-    }
-
-    /* Capuchón metálico dorado e hilo superior de cada bola */
-    .casilla::before {
-      content: "";
-      position: absolute;
-      top: -11px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 16px;
-      height: 11px;
-      background: linear-gradient(90deg, #9e7b18, #f5d76e, #9e7b18);
-      border-radius: 3px 3px 0 0;
-      box-shadow: 0 -6px 0 -6px var(--dorado), 0 -7px 0 -6px var(--dorado);
-      z-index: 3;
+      box-shadow: inset -4px -5px 0 rgba(0, 0, 0, 0.22), 0 5px 10px rgba(0, 0, 0, 0.28);
+      overflow: visible;
     }
 
     .casilla:hover {
@@ -212,10 +314,26 @@
       box-shadow: 0 10px 20px rgba(0, 0, 0, 0.45);
     }
 
+    /* Capuchón superior estilo dibujo con anilla */
+    .casilla::before {
+      content: "";
+      position: absolute;
+      top: -11px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 16px;
+      height: 9px;
+      background-color: #e5bc63;
+      border: 2.5px solid #1b1918;
+      border-radius: 3px 3px 0 0;
+      box-shadow: 0 -6px 0 -4px #f3ece0, 0 -6px 0 -2px #1b1918;
+      z-index: 3;
+    }
+
     .casilla .numero {
-      font-size: clamp(1.4rem, 3.5vw, 2.3rem);
+      font-size: clamp(1.15rem, 3.6vw, 2.2rem);
       line-height: 1;
-      z-index: 2;
+      z-index: 4;
     }
 
     /* Estado cuando la casilla ya fue abierta */
@@ -239,286 +357,14 @@
       display: flex;
       align-items: center;
       justify-content: center;
-    }
-
-   /* ==========================================================
-       ESTILO BASE ILUSTRADO PARA TODAS LAS BOLAS
-       ========================================================== */
-    .casilla {
-      width: clamp(46px, 13.5vw, 94px);
-      height: clamp(46px, 13.5vw, 94px);
-      border-radius: 50% !important;
-      clip-path: none !important;
-      border: 3px solid #1b1918 !important; /* Contorno negro estilo ilustración */
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      user-select: none;
-      position: relative;
-      margin-top: 14px;
-      transition: transform 0.22s ease, box-shadow 0.22s ease;
-      box-shadow: inset -4px -5px 0 rgba(0, 0, 0, 0.22), 0 5px 10px rgba(0, 0, 0, 0.28);
-      overflow: visible;
-    }
-
-    .casilla:hover:not(.bloqueada) {
-      transform: scale(1.08) rotate(-2deg);
-    }
-
-    /* Capuchón superior estilo dibujo con anilla */
-    .casilla::before {
-      content: "";
-      position: absolute;
-      top: -11px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 16px;
-      height: 9px;
-      background-color: #e5bc63;
-      border: 2.5px solid #1b1918;
-      border-radius: 3px 3px 0 0;
-      box-shadow: 0 -6px 0 -4px #f3ece0, 0 -6px 0 -2px #1b1918;
-      z-index: 3;
-    }
-
-    /* Número con sombra/contorno oscuro para que se lea perfecto sobre cualquier fondo */
-    .casilla .numero {
-      font-size: clamp(1.15rem, 3.6vw, 2.2rem);
-      line-height: 1;
-      z-index: 4;
-      color: #fdf6e7;
-      text-shadow:
-        -1.5px -1.5px 0 #1b1918,
-         1.5px -1.5px 0 #1b1918,
-        -1.5px  1.5px 0 #1b1918,
-         1.5px  1.5px 0 #1b1918,
-         0px    3px   0 rgba(0, 0, 0, 0.35);
-    }
-
-   /* ==========================================================
-       ESTILO BASE ILUSTRADO COLORIDO (PALETA PASTEL Y VINTAGE)
-       ========================================================== */
-    .casilla {
-      width: clamp(46px, 13.5vw, 94px);
-      height: clamp(46px, 13.5vw, 94px);
-      border-radius: 50% !important;
-      clip-path: none !important;
-      border: 2.8px solid #231f20 !important; /* Trazo fino estilo ilustración */
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      user-select: none;
-      position: relative;
-      margin-top: 14px;
-      transition: transform 0.22s ease, box-shadow 0.22s ease;
-      /* Sombra inferior suave y brillo de cristal arriba a la izquierda */
-      box-shadow: inset -5px -6px 0 rgba(0, 0, 0, 0.16),
-                  inset 5px 5px 8px rgba(255, 255, 255, 0.45),
-                  0 5px 10px rgba(0, 0, 0, 0.25);
-      overflow: visible;
-    }
-
-    .casilla:hover:not(.bloqueada) {
-      transform: scale(1.08) rotate(-2deg);
-    }
-
-    /* Capuchón metálico dorado con anilla superior */
-    .casilla::before {
-      content: "";
-      position: absolute;
-      top: -11px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 15px;
-      height: 9px;
-      background-color: #eab543;
-      border: 2.5px solid #231f20;
-      border-radius: 3px 3px 0 0;
-      box-shadow: 0 -6px 0 -4px #f3ece0, 0 -6px 0 -2px #231f20;
-      z-index: 3;
-    }
-
-    /* Números claros con borde oscuro nítido para máxima legibilidad */
-    .casilla .numero {
-      font-size: clamp(1.15rem, 3.6vw, 2.2rem);
-      line-height: 1;
-      z-index: 4;
-      color: #fffaf0;
-      text-shadow:
-        -1.5px -1.5px 0 #231f20,
-         1.5px -1.5px 0 #231f20,
-        -1.5px  1.5px 0 #231f20,
-         1.5px  1.5px 0 #231f20,
-         0px    2.5px 0 rgba(35, 31, 32, 0.45);
-    }
-
-    /* ==========================================================
-       ESTILO BASE ILUSTRADO VIVO Y CÁLIDO
-       ========================================================== */
-    .casilla {
-      width: clamp(46px, 13.5vw, 94px);
-      height: clamp(46px, 13.5vw, 94px);
-      border-radius: 50% !important;
-      clip-path: none !important;
-      border: 3px solid #1e191a !important; /* Contorno oscuro estilo dibujo */
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      user-select: none;
-      position: relative;
-      margin-top: 14px;
-      transition: transform 0.22s ease, box-shadow 0.22s ease;
-      box-shadow: inset -5px -6px 0 rgba(0, 0, 0, 0.18),
-                  inset 5px 5px 8px rgba(255, 255, 255, 0.45),
-                  4px 6px 0 rgba(215, 180, 135, 0.45);
-      overflow: visible;
-    }
-
-    .casilla:hover:not(.bloqueada) {
-      transform: scale(1.08) rotate(-2deg);
-    }
-
-    /* Capuchón amarillo dorado vivo con anilla superior */
-    .casilla::before {
-      content: "";
-      position: absolute;
-      top: -11px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 16px;
-      height: 9px;
-      background-color: #f9b218;
-      border: 2.5px solid #1e191a;
-      border-radius: 3px 3px 0 0;
-      box-shadow: 0 -6px 0 -4px #f3ece0, 0 -6px 0 -2px #1e191a;
-      z-index: 3;
-    }
-
-    /* Base de los números (cada bola define su propio color de texto y contorno) */
-    .casilla .numero {
-      font-size: clamp(1.15rem, 3.6vw, 2.2rem);
-      line-height: 1;
-      z-index: 4;
-    }
-
-    /* ==========================================================
-       ESTILO BASE ILUSTRADO PARA TODAS LAS BOLAS
-       ========================================================== */
-    .casilla {
-      width: clamp(46px, 13.5vw, 94px);
-      height: clamp(46px, 13.5vw, 94px);
-      border-radius: 50% !important;
-      clip-path: none !important;
-      border: 3px solid #1b1918 !important; /* Contorno negro estilo ilustración */
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      user-select: none;
-      position: relative;
-      margin-top: 14px;
-      transition: transform 0.22s ease, box-shadow 0.22s ease;
-      box-shadow: inset -4px -5px 0 rgba(0, 0, 0, 0.22), 0 5px 10px rgba(0, 0, 0, 0.28);
-      overflow: visible;
-    }
-
-    .casilla:hover:not(.bloqueada) {
-      transform: scale(1.08) rotate(-2deg);
-    }
-
-    /* Capuchón superior estilo dibujo con anilla */
-    .casilla::before {
-      content: "";
-      position: absolute;
-      top: -11px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 16px;
-      height: 9px;
-      background-color: #e5bc63;
-      border: 2.5px solid #1b1918;
-      border-radius: 3px 3px 0 0;
-      box-shadow: 0 -6px 0 -4px #f3ece0, 0 -6px 0 -2px #1b1918;
-      z-index: 3;
-    }
-
-    /* Número con sombra/contorno oscuro para que se lea perfecto sobre cualquier fondo */
-    .casilla .numero {
-      font-size: clamp(1.15rem, 3.6vw, 2.2rem);
-      line-height: 1;
-      z-index: 4;
-      color: #fdf6e7;
-      text-shadow:
-        -1.5px -1.5px 0 #1b1918,
-         1.5px -1.5px 0 #1b1918,
-        -1.5px  1.5px 0 #1b1918,
-         1.5px  1.5px 0 #1b1918,
-         0px    3px   0 rgba(0, 0, 0, 0.35);
-    }
-
-    /* ==========================================================
-       ESTILO BASE ILUSTRADO PARA TODAS LAS BOLAS
-       ========================================================== */
-    .casilla {
-      width: clamp(46px, 13.5vw, 94px);
-      height: clamp(46px, 13.5vw, 94px);
-      border-radius: 50% !important;
-      clip-path: none !important;
-      border: 3px solid #1b1918 !important; /* Contorno negro estilo ilustración */
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      user-select: none;
-      position: relative;
-      margin-top: 14px;
-      transition: transform 0.22s ease, box-shadow 0.22s ease;
-      box-shadow: inset -4px -5px 0 rgba(0, 0, 0, 0.22), 0 5px 10px rgba(0, 0, 0, 0.28);
-      overflow: visible;
-    }
-
-    .casilla:hover:not(.bloqueada) {
-      transform: scale(1.08) rotate(-2deg);
-    }
-
-    /* Capuchón superior estilo dibujo con anilla */
-    .casilla::before {
-      content: "";
-      position: absolute;
-      top: -11px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 16px;
-      height: 9px;
-      background-color: #e5bc63;
-      border: 2.5px solid #1b1918;
-      border-radius: 3px 3px 0 0;
-      box-shadow: 0 -6px 0 -4px #f3ece0, 0 -6px 0 -2px #1b1918;
-      z-index: 3;
-    }
-
-    /* Número con sombra/contorno oscuro para que se lea perfecto sobre cualquier fondo */
-    .casilla .numero {
-      font-size: clamp(1.15rem, 3.6vw, 2.2rem);
-      line-height: 1;
-      z-index: 4;
-      color: #fdf6e7;
-      text-shadow:
-        -1.5px -1.5px 0 #1b1918,
-         1.5px -1.5px 0 #1b1918,
-        -1.5px  1.5px 0 #1b1918,
-         1.5px  1.5px 0 #1b1918,
-         0px    3px   0 rgba(0, 0, 0, 0.35);
+      z-index: 5;
     }
 
     /* ==========================================================
        ESTAMPADOS Y TIPOGRAFÍAS ÚNICAS DEL 1 AL 24
        ========================================================== */
 
-    /* 1: Roja con lunares dorados (como la 1ª de la imagen) */
+    /* 1: Roja con lunares dorados */
     .estilo-1 {
       background-color: #a62c21;
       background-image: radial-gradient(#e5bc63 1.8px, transparent 1.8px), radial-gradient(#e5bc63 1.8px, #a62c21 1.8px);
@@ -553,7 +399,7 @@
     .estilo-3 {
       background: linear-gradient(165deg, #a62c21 36%, #e5bc63 37%, #e5bc63 43%, #fdf6e7 44%, #fdf6e7 56%, #e5bc63 57%, #e5bc63 63%, #a62c21 64%);
       font-family: 'Playfair Display', serif;
-      font-style: bold;
+      font-style: italic;
       font-weight: 900;
     }
     .estilo-3 .numero {
@@ -561,7 +407,7 @@
       text-shadow: -1.5px -1.5px 0 #eef6fa, 1.5px -1.5px 0 #eef6fa, -1.5px 1.5px 0 #eef6fa, 1.5px 1.5px 0 #eef6fa, 0 2.5px 0 rgba(255,255,255,0.8);
     }
 
-    /* 4: Remolino caramelo rojo, dorado y crema (como la 7ª de la imagen) */
+    /* 4: Remolino caramelo rojo, dorado y crema */
     .estilo-4 {
       background: repeating-conic-gradient(#a62c21 0deg 30deg, #e5bc63 30deg 34deg, #fdf6e7 34deg 56deg, #e5bc63 56deg 60deg);
       font-family: 'Rye', serif;
@@ -572,7 +418,7 @@
       text-shadow: -1.5px -1.5px 0 #1e191a, 1.5px -1.5px 0 #1e191a, -1.5px 1.5px 0 #1e191a, 1.5px 1.5px 0 #1e191a, 0 3px 0 #1e191a;
     }
 
-    /* 5: Verde con rayas diagonales doradas (como la 4ª de la imagen) */
+    /* 5: Verde con rayas diagonales doradas */
     .estilo-5 {
       background: repeating-linear-gradient(-45deg, #2c5e3b, #2c5e3b 11px, #e5bc63 11px, #e5bc63 14px);
       font-family: 'Corben', serif;
@@ -583,7 +429,7 @@
       text-shadow: -1.5px -1.5px 0 #ffffff, 1.5px -1.5px 0 #ffffff, -1.5px 1.5px 0 #ffffff, 1.5px 1.5px 0 #ffffff, 0 2.5px 0 #1e191a;
     }
 
-    /* 6: Roja y verde dividida con banda dorada (como la 5ª de la imagen) */
+    /* 6: Roja y verde dividida con banda dorada */
     .estilo-6 {
       background: linear-gradient(180deg, #a62c21 62%, #e5bc63 63%, #e5bc63 70%, #2c5e3b 71%);
       font-family: 'Special Elite', monospace;
@@ -594,7 +440,7 @@
       text-shadow: -1.5px -1.5px 0 #7a0618, 1.5px -1.5px 0 #7a0618, -1.5px 1.5px 0 #7a0618, 1.5px 1.5px 0 #7a0618;
     }
 
-    /* 7: Verde con franjas rojas curvas y lazo rojo (como la 6ª de la imagen) */
+    /* 7: Verde con franjas rojas curvas y lazo rojo */
     .estilo-7 {
       background: repeating-linear-gradient(15deg, #2c5e3b, #2c5e3b 12px, #a62c21 12px, #a62c21 22px);
       font-family: 'Alfa Slab One', serif;
@@ -609,7 +455,7 @@
       text-shadow: -2px -2px 0 #ffffff, 2px -2px 0 #ffffff, -2px 2px 0 #ffffff, 2px 2px 0 #ffffff;
     }
 
-    /* 8: Verde con zigzag dorado y lazo dorado (como la 8ª de la imagen) */
+    /* 8: Verde con zigzag dorado y lazo dorado */
     .estilo-8 {
       background-color: #2c5e3b;
       background-image:
@@ -639,8 +485,9 @@
       font-family: 'Playfair Display', serif;
       font-weight: 900;
     }
-     .estilo-9 .numero {
-      color: #c8102e;
+    .estilo-9 .numero {
+      color: #ffffff;
+      text-shadow: -1.5px -1.5px 0 #1e191a, 1.5px -1.5px 0 #1e191a, -1.5px 1.5px 0 #1e191a, 1.5px 1.5px 0 #1e191a;
     }
 
     /* 10: Dorada cálida con lunares rojos y verdes */
@@ -653,8 +500,8 @@
     }
     .estilo-10::before { background-color: #a62c21; }
     .estilo-10 .numero {
-      color: #ff9933;
-      text-shadow: -1.5px -1.5px 0 #1e191a, 1.5px -1.5px 0 #1e191a, -1.5px 1.5px 0 #1e191a, 1.5px 1.5px 0 #1e191a, 0 3px 0 #1e191a;
+      color: #a62c21;
+      text-shadow: -1.5px -1.5px 0 #fffaf0, 1.5px -1.5px 0 #fffaf0, -1.5px 1.5px 0 #fffaf0, 1.5px 1.5px 0 #fffaf0, 0 2.5px 0 #1e191a;
     }
 
     /* 11: Verde pino con lunares dorados */
@@ -675,7 +522,7 @@
       background: repeating-conic-gradient(#2c5e3b 0deg 30deg, #e5bc63 30deg 34deg, #fdf6e7 34deg 56deg, #e5bc63 56deg 60deg);
       font-family: 'Special Elite', monospace;
     }
-     .estilo-12 .numero {
+    .estilo-12 .numero {
       color: #134d2f;
       text-shadow: -1.5px -1.5px 0 #fffaf0, 1.5px -1.5px 0 #fffaf0, -1.5px 1.5px 0 #fffaf0, 1.5px 1.5px 0 #fffaf0, 0 3px 0 #1e191a;
     }
@@ -706,7 +553,7 @@
       text-shadow: -1.5px -1.5px 0 #ffffff, 1.5px -1.5px 0 #ffffff, -1.5px 1.5px 0 #ffffff, 1.5px 1.5px 0 #ffffff, 0 3px 0 #1e191a;
     }
 
-    /* 15: Crema vintage con lunares rojos y verdes */
+    /* 15: Roja con franjas horizontales blancas */
     .estilo-15 {
       background: linear-gradient(180deg, #c8102e 24%, #ffffff 25%, #ffffff 39%, #c8102e 40%, #c8102e 60%, #ffffff 61%, #ffffff 75%, #c8102e 76%);
       font-family: 'Special Elite', monospace;
@@ -724,7 +571,7 @@
     }
     .estilo-16 .numero {
       color: #18633d;
-      text-shadow: -1.5px -1.5px 0 #18633d, 1.5px -1.5px 0#18633d, -1.5px 1.5px 0 #ffffff, 1.5px 1.5px 0 #ffffff, 0 2.5px 0 #1e191a;
+      text-shadow: -1.5px -1.5px 0 #ffffff, 1.5px -1.5px 0 #ffffff, -1.5px 1.5px 0 #ffffff, 1.5px 1.5px 0 #ffffff, 0 2.5px 0 #1e191a;
     }
 
     /* 17: Verde pino con banda central roja y borde dorado */
@@ -735,6 +582,7 @@
     }
     .estilo-17 .numero {
       color: #ffffff;
+      text-shadow: -1.5px -1.5px 0 #1e191a, 1.5px -1.5px 0 #1e191a, -1.5px 1.5px 0 #1e191a, 1.5px 1.5px 0 #1e191a;
     }
 
     /* 18: Roja con lazo dorado arriba */
@@ -796,8 +644,9 @@
       background: linear-gradient(90deg, #a62c21 42%, #1b1918 43%, #1b1918 57%, #a62c21 58%);
       border-radius: 4px;
     }
-     .estilo-22 .numero {
-      color: #c8102e;
+    .estilo-22 .numero {
+      color: #ffffff;
+      text-shadow: -1.5px -1.5px 0 #7a0618, 1.5px -1.5px 0 #7a0618, -1.5px 1.5px 0 #7a0618, 1.5px 1.5px 0 #7a0618;
     }
 
     /* 23: Remolino rojo y verde con líneas doradas */
@@ -814,7 +663,7 @@
     /* 24: Especial Nochebuena - Roja y dorada con doble aro */
     .estilo-24 {
       background: radial-gradient(circle, #a62c21 56%, #e5bc63 58%, #e5bc63 72%, #2c5e3b 74%);
-      font-family: 'Cinzel', bold;
+      font-family: 'Cinzel', serif;
       font-weight: 900;
     }
     .estilo-24::before {
@@ -826,8 +675,6 @@
       color: #18633d;
       text-shadow: -1.5px -1.5px 0 #ffffff, 1.5px -1.5px 0 #ffffff, -1.5px 1.5px 0 #ffffff, 1.5px 1.5px 0 #ffffff, 0 2.5px 0 #1e191a;
     }
-
-      
 
     /* ==========================================================
        VENTANA EMERGENTE (MODAL)
@@ -864,16 +711,21 @@
     }
 
     .modal-caja h2 {
-      font-family: 'Corben', serif;
+      font-family: 'Corben', 'Segoe UI Emoji', 'Apple Color Emoji', 'Noto Color Emoji', serif;
       color: var(--rojo);
       margin-top: 0;
     }
 
-    
+    .modal-caja p {
+      font-family: 'Corben', 'Segoe UI Emoji', 'Apple Color Emoji', 'Noto Color Emoji', serif;
+      white-space: pre-line;
+      line-height: 1.5;
+    }
+
     .modal-caja img {
       max-width: 100%;
-      max-height: 55vh;          /* Evita que fotos muy verticales ocupen toda la pantalla */
-      object-fit: contain;       /* Mantiene la proporción original de la foto sin recortarla */
+      max-height: 55vh;
+      object-fit: contain;
       border-radius: 8px;
       border: 2px solid var(--dorado);
       margin: 12px 0;
@@ -908,33 +760,6 @@
       color: #5c5346;
       font-size: 0.8rem;
     }
-    /* Selector de vista de pantalla */
-    .selector-vista {
-      display: flex;
-      justify-content: center;
-      gap: 8px;
-      margin: 10px auto 15px;
-      flex-wrap: wrap;
-    }
-
-    .selector-vista button {
-      background-color: var(--crema);
-      color: var(--verde-oscuro);
-      border: 2px solid var(--verde);
-      padding: 6px 12px;
-      border-radius: 20px;
-      font-family: inherit;
-      font-size: 0.85rem;
-      font-weight: bold;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-
-    .selector-vista button.activo,
-    .selector-vista button:hover {
-      background-color: var(--verde);
-      color: var(--crema);
-    }
 
     /* Modos forzados desde el botón */
     body.vista-tablet .arbol-wrapper { max-width: 650px; }
@@ -959,19 +784,20 @@
     body.vista-movil .casilla .numero { font-size: 1.1rem; }
     body.vista-movil .casilla::before { top: -8px; width: 12px; height: 8px; }
     body.vista-movil .tronco-arbol { width: 65px; height: 60px; margin-top: -32px; }
-
   </style>
 </head>
 <body>
-    
+
   <header>
     <div class="selector-vista">
-    <button id="btn-pc" class="activo" onclick="cambiarVista('pc')">💻 Ordenador</button>
-    <button id="btn-tablet" onclick="cambiarVista('tablet')">📱 Tablet</button>
-    <button id="btn-movil" onclick="cambiarVista('movil')">📲 Móvil</button>
-  </div>
-    <h1>Feliz Navidad. Te quiero mucho <3 </h1>
-    <p>Abre una bolica cada día hasta Navidad</p>
+      <button id="btn-pc" class="activo" onclick="cambiarVista('pc')">💻 Ordenador</button>
+      <button id="btn-tablet" onclick="cambiarVista('tablet')">📱 Tablet</button>
+      <button id="btn-movil" onclick="cambiarVista('movil')">📲 Móvil</button>
+    </div>
+    <h1>El calendario de los recuerdos &lt;3</h1>
+    <div class="subtitulo-fila">
+      <button class="btn-explicacion" onclick="abrirExplicacion()">❓ Explicación</button>
+    </div>
   </header>
 
   <!-- ÁRBOL DE NAVIDAD CON LAS 25 CASILLAS -->
@@ -982,7 +808,7 @@
   </div>
 
   <!-- VENTANA EMERGENTE CON TU SORPRESA -->
-  <div class="modal-fondo" id="modal">
+  <div class="modal-fondo" id="modal" onclick="if(event.target === this) cerrarModal()">
     <div class="modal-caja">
       <h2 id="modal-titulo">Día X</h2>
       <p id="modal-texto">Contenido del día...</p>
@@ -991,119 +817,316 @@
     </div>
   </div>
 
+  <!-- VENTANA EMERGENTE DE EXPLICACIÓN -->
+  <div id="modal-explicacion" class="modal-fondo" onclick="if(event.target === this) cerrarExplicacion()">
+    <div class="modal-caja">
+      <h2>Cómo funciona este calendario? 🎄</h2>
+      <p>Cada día de diciembre podrás abrir una bola nueva del árbol. Cada una de ellas es un recuerdo.</p>
+      <p>En cada bola encontrarás la explicación del día que es (la más absurda que encuentre). Y te recomiento que lo recuerdes bien... </p>
+      <p>Todo esto acompañado de una foto y un mensajico especial❤️ *Es de las cosas más ñoñas que leerás nunca </p>
+      <button class="boton-cerrar" onclick="cerrarExplicacion()">Cerrar</button>
+    </div>
+  </div>
+
   <div class="controles-pie">
     <button onclick="reiniciarProgreso()">Cerrar casillas abiertas (modo prueba)</button>
   </div>
 
+  <!-- VENTANA EMERGENTE PARA AVISOS Y CÓDIGO DE DESBLOQUEO -->
+  <div id="modal-aviso" class="modal-fondo" onclick="if(event.target === this) cerrarAviso()">
+    <div class="modal-caja">
+      <h2 id="aviso-titulo">Aviso 🎄</h2>
+      <p id="aviso-texto"></p>
       
+      <!-- Zona para escribir la contraseña (solo visible cuando el día ya pasó) -->
+      <div id="zona-codigo" style="display: none;">
+        <input type="text" id="input-codigo" class="caja-codigo-input" placeholder="Escribe el código..." onkeydown="if(event.key === 'Enter') comprobarCodigo()">
+        <div id="error-codigo" class="error-codigo"></div>
+        <div class="botones-codigo">
+          <button class="boton-desbloquear" onclick="comprobarCodigo()">Desbloquear 🔓</button>
+          <button class="boton-cerrar" style="margin-top: 0;" onclick="cerrarAviso()">Cancelar</button>
+        </div>
+      </div>
+
+      <!-- Botón cerrar normal (cuando aún no ha llegado el día) -->
+      <button id="btn-cerrar-aviso" class="boton-cerrar" onclick="cerrarAviso()">Cerrar</button>
+    </div>
+  </div>
+
   <script>
     /* ==========================================================
-       1. CONFIGURACIÓN Y SORPRESAS DE LOS 24 DÍAS
-       Edita aquí tus textos, fotos o enlaces
+       1. CONFIGURACIÓN Y SORPRESAS DE LOS 25 DÍAS
        ========================================================== */
-    const BLOQUEAR_POR_FECHA_REAL = false ; // Cambia a "true" cuando lo termines de diseñar
+    const BLOQUEAR_POR_FECHA_REAL = false; // Cambia a "true" cuando lo termines de diseñar
+    const MES_CALENDARIO = 11; // 11 = Diciembre en JavaScript
 
     const sorpresas = [
-      { dia: 1,  titulo: "Día de explicación", texto: "Cada día encontrarás la expliación del día que es (la más absurda de encuentre) acompañada de una foto y un mensajico. T quiero mucho <3 Nos vemos mañana" },
-      { dia: 2,  titulo: "Día Internacional para la Abolición de la Esclavitud", texto: "mamma" , imagen: "foto2.JPEG" },
-      { dia: 3,  titulo: "Día del Cine 3D", texto: "Sube el volumen y escucha nuestra canción navideña favorita.", imagen: "foto3.JPEG" },
-      { dia: 4,  titulo: "Día del Guepardo", texto: "Escribe aquí tu sorpresa para el día 4." , imagen: "foto4.JPEG" },
-      { dia: 5,  titulo: "Día Mundial del Suelo", texto: "Escribe aquí tu sorpresa para el día 5." , imagen: "foto5.JPEG" },
-      { dia: 6,  titulo: "Día de la Constitución", texto: "Escribe aquí tu sorpresa para el día 6." , imagen: "foto6.JPEG" },
-      { dia: 7,  titulo: "Día de las Velitas", texto: "Escribe aquí tu sorpresa para el día 7." , imagen: "foto7.JPEG" },
-      { dia: 8,  titulo: "Día de la Virgen", texto: "Escribe aquí tu sorpresa para el día 8." , imagen: "foto8.JPEG" },
-      { dia: 9,  titulo: "Día Internacional contra la Corrupción", texto: "Escribe aquí tu sorpresa para el día 9." , imagen: "foto9.JPEG" },
-      { dia: 10, titulo: "Día del Trabajador Social (Pilar es eso)", texto: "Escribe aquí tu sorpresa para el día 10." , imagen: "foto10.JPEG"},
-      { dia: 11, titulo: "Día Internacional de las Montañas", texto: "Escribe aquí tu sorpresa para el día 11." , imagen: "foto11.JPEG"},
-      { dia: 12, titulo: "Día Internacional de la Cobertura", texto: "¡Ya llevamos 12 días! Hoy toca paseo para ver las luces de Navidad.", imagen: "foto12.JPEG" },
-      { dia: 13, titulo: "Día Internacional del Canto Coral", texto: "Escribe aquí tu sorpresa para el día 13." , imagen: "foto13.JPEG" },
-      { dia: 14, titulo: "Día Mundial del Mono (tu día)", texto: "Escribe aquí tu sorpresa para el día 14." , imagen: "foto14.JPEG" },
-      { dia: 15, titulo: "Día Mundial del Otaku (ugh)", texto: "Escribe aquí tu sorpresa para el día 15." , imagen: "foto15.JPEG" },
-      { dia: 16, titulo: "Día del nacimiento de Beethoven", texto: "Escribe aquí tu sorpresa para el día 16." , imagen: "foto16.JPEG" },
-      { dia: 17, titulo: "Hoy no hay día de nada :(", texto: "Escribe aquí tu sorpresa para el día 17." , imagen: "foto17.JPEG" },
-      { dia: 18, titulo: "Día del Jersey Navideño Feo", texto: "Escribe aquí tu sorpresa para el día 18." , imagen: "foto18.JPEG" },
-      { dia: 19, titulo: "Día Internacional del Emo", texto: "Escribe aquí tu sorpresa para el día 19." , imagen: "foto19.JPEG" },
-      { dia: 20, titulo: "Día de las Migas", texto: "Escribe aquí tu sorpresa para el día 20." , imagen: "foto20.JPEG" },
-      { dia: 21, titulo: "Día del solsticio de invierno", texto: "Escribe aquí tu sorpresa para el día 21." , imagen: "foto21.png" },
-      { dia: 22, titulo: "Día Mundial del Termómetro", texto: "Escribe aquí tu sorpresa para el día 22." , imagen: "foto22.JPEG" },
-      { dia: 23, titulo: "Víspera de Nochebuena", texto: "Prepara el gorro de Papá Noel, ¡mañana es el gran día!" , imagen: "foto23.JPEG" },
-      { dia: 24, titulo: "Día de Nochebuena!", texto: " hh" , imagen: "foto24.png" },
-      { dia: 25, titulo: "Día de Navidad", texto: "Hoy si hay sopresa🫢 Ya puedes abrirlo (si no lo habías hecho ya...). Y esta foto es una pista!!", imagen: "foto25.jpg" }
-  ]
+      { dia: 1,  titulo: "Día Mundial de la Lucha contra el Sida",
+        texto: "Hoy es el primer día!! \n\n *Las fotos van a ir (seguramente) de más reciente a menos. Lo que me ha costado encontrar 25 fotos no es normal, pero a mi siempre se me olvida hacernos fotos.\n\n Se podría decir que es nuestro primer viaje de verdad, y sinceramente me encantó descubrir una nueva ciudad juntas y ojalá conocer muchas más pronto :). \n\n Londres siempre será un sitio especial para mi <3\n\nT quiero mucho <3 Nos vemos mañana",
+        imagen: "foto1.JPEG" },
+
+      { dia: 2,  titulo: "Día Internacional para la Abolición de la Esclavitud",
+        texto: "Hoy tengo poco que decir, ya que es del mismo viaje que ayer. Por lo que el mensaje no tiene mucho que ver con la foto. \n\n  Aprovecho el día de hoy para darte las gracias por todo lo que haces por mi, aunque puede ser que muchas veces no lo creas (porque m cuesta mucho comunicarme correctamente). \n\n Muchas veces cuando tengo un mal día, el sentir que puedo contar contigo, ya solo eso m ayuda. Y el estar contigo es de las cosas que más paz me dan en el mundo. \n\n Gracias también porque gracias a ti he aprendido un montón de cosas (no lo creerás pero ahora se programar para hacer cosas así, aprendí a bordar también gracias a ti y no solo eso, desde que estoy a tu lado, yo siento que soy mejor persona que antes y en parte es gracias a ti seguro) \n\nT quiero mucho <3 Nos vemos mañana",
+        imagen: "foto2.JPEG" },
+
+      { dia: 3,  titulo: "Día del Cine 3D",
+        texto: "Es el día del cine, y por ello una foto yendo al cine (creo jajaj) \n\n Es una foto de un día cualquiera, pero no por ello menos especial, porque cada día contigo es especial, aunque no nos podamos ver tanto como a mi me gustaría (porque me encantaría ser una extensión más de tu cuerpo), creo que eso también hace mucho mejor cada día que puedo pasar un rato a tu lado. \n\n También creo que de mis momentos favoritos es ver una peli contigo, poder tumbarme a tu lado y relajar, m encanta \n\n Ojalá pasar muchos más días a tu lado y ver tantas pelis que no sea capaz de recordarlas (ya no lo soy la verdad, porque hemos visto bastantes pero contigo siempre quiero más).\n\nT quiero mucho <3 Nos vemos mañana",
+        imagen: "foto3.JPEG" },
+
+      { dia: 4,  titulo: "Día del Guepardo",
+        texto: "Hoy solo sales tu, como un guepardo atacando a su presa.\n\n 6/7/26 ; tres años después y si no mal recuerdo primer aniversario que celebramos (por mi culpa porque siempre había estado viajando ese día, pido perdón) \n\n Me encanta esta foto porque junta dos cosas que me encanta, comer (carbonara sobre todo) y tu. \n\n Como cada recuerdo, tiene un ojalá porque ojalá seguir queriéndonos muchos años más y poder disfrutar de salir a comer y charlar tranquilamente. \n\nT quiero mucho <3 Nos vemos mañana",
+        imagen: "foto4.JPEG" },
+
+      { dia: 5,  titulo: "Día Mundial del Suelo",
+        texto: "Otro día más que no salgo yo! Pero sales tu haciendo gachas!!\n\n Creo que no eres consciente de la ilusión que me pudo hacer verte haciendo gachas, aunque aun no hayas probado las buenas de verdad (las de mi familia). No se bien si te gustaron de verdad, pero tendrás que acostumbrarte porque te queda toda una vida de comer gachas. \n\n Y ya lo dijo Hugo, tu lo hiciste mucho mejor que yo, tendrás que volver a perfeccionar tu técnica.\n\nT quiero mucho <3 Nos vemos mañana",
+        imagen: "foto5.JPEG" },
+
+      { dia: 6,  titulo: "Día de la Constitución",
+        texto: "Quizás me odiarás por poner esta foto.\n\n Pero sinceramente, me sirve perfecto para explicarte una cosa.\n\n Muchas veces me preguntas si vas bien, si tienes mala cara, etc... Yo de verdad que no puedo contestar nunca de manera diferente, porque a mi me encantas de cualquier forma, yo siempre te veo preciosa (aunque tengas la cara como si hubieses perdido una pelea), y por muy mal que tu te puedas ver a ti misma, recuerda que siempre habrá unos ojos (los míos) que te verán como la mujer más maravillosa del mundo (en todos los sentidos). \n\nT quiero mucho <3 Nos vemos mañana",
+        imagen: "foto6.JPEG" },
+
+      { dia: 7,  titulo: "Día de las Velitas",
+        texto: "Nuestro finde más lujoso! (probablemente lo será durante mucho tiempo)\n\n Pero el lujo de ese fin de semana, no fue el hotel (únicamente, porque si lo fue), el verdadero lujo es poder compartirlo contigo, pasear por la playa de tu mano, ver como esperas pacientemente a que m bañe en el mar jiji, cenar una ensalada del Mercadona en la cama y las cosas más sencillas que te puedas imaginar, eso para mi de verdad si es un lujo.\n\n Esperemos que la vida nos regale mucho más lujo a lo largo de los años. \n\nT quiero mucho <3 Nos vemos mañana",
+        imagen: "foto7.JPEG" },
+
+      { dia: 8,  titulo: "Día de la Virgen",
+        texto: "\n\nT quiero mucho <3 Nos vemos mañana",
+        imagen: "foto8.JPEG" },
+
+      { dia: 9,  titulo: "Día Internacional contra la Corrupción",
+        texto: "Nuestro primer concierto. \n\n Quizás tu tortura tener que acompañarme, pero a mi me hizo muy feliz que me acompañases y poder tener ese recuerdo a tu lado.\n\n Hoy quiero darte de nuevo las gracias por todo lo que hacer por mi, porque se que muchas veces haces cosas que no t apetecen del todo solo por mi, como esta por ejemplo. \n\n Me gustaría poder llevarte y acompañarte algún día a un concierto que tu si quieras ir y no lo hagas solo por mi, pero aun no tengo tanto presupuesto, dame unos añitos como ingeniera xfa. \n\nT quiero mucho <3 Nos vemos mañana",
+        imagen: "foto9.JPEG" },
+
+      { dia: 10, titulo: "Día del Trabajador Social",
+        texto: "Mis dos perras (es broma pido perdón). \n\n Amo la sencillez de esta foto, un día cualquiera durmiendo juntas (que no t haces una idea de como m gustaría hoy dormir contigo *da igual cuando lo leas). \n\nMi galita prácticamente que solo viene a mi habitación cuando estás tu porque ella también te quiere mucho (no más que yo) y a mi m hace tan feliz que t quiera. \n\n Me encanta veros juntas.\n\nT quiero mucho <3 Nos vemos mañana\n\n*Como dato extra: Pilar es trabajadora social",
+        imagen: "foto10.JPEG" },
+
+      { dia: 11, titulo: "Día Internacional de las Montañas",
+        texto: "Seguramente tu odies esta foto pero a mi me encanta. \n\n Creo recordar que era Budapest, te llamé por la noche y te enseñé el parlamento ese famoso de Budapest y un poco la ciudad, y no sabes lo feliz que m hizo poder compartir mis recuerdos aunque estés a miles de km, porque da igual lo lejos que estés de mi o lo que yo esté haciendo por cualquier parte de Europa, tu siempre eres la persona con la que quiero compartir todos mis recuerdos. \n\n Y siempre que viajo lejos, me paso el día pensando en lo que me gustaría que estuvieses conmigo pero creo que también es bonito poder sentirte cerca estando lejos. s\n\nT quiero mucho <3 Nos vemos mañana",
+        imagen: "foto11.JPEG" },
+
+      { dia: 12, titulo: "Día Internacional de la Cobertura",
+        texto: "\n\nT quiero mucho <3 Nos vemos mañana",
+        imagen: "foto12.JPEG" },
+
+      { dia: 13, titulo: "Día Internacional del Canto Coral",
+        texto: "\n\nT quiero mucho <3 Nos vemos mañana",
+        imagen: "foto13.JPEG" },
+
+      { dia: 14, titulo: "Día Mundial del Mono (tu día)",
+        texto: "\n\nT quiero mucho <3 Nos vemos mañana",
+        imagen: "foto14.JPEG" },
+
+      { dia: 15, titulo: "Día Mundial del Otaku (ugh)",
+        texto: "\n\nT quiero mucho <3 Nos vemos mañana",
+        imagen: "foto15.JPEG" },
+
+      { dia: 16, titulo: "Día del nacimiento de Beethoven",
+        texto: "\n\nT quiero mucho <3 Nos vemos mañana",
+        imagen: "foto16.JPEG" },
+
+      { dia: 17, titulo: "Hoy no hay día de nada :(",
+        texto: "\n\nT quiero mucho <3 Nos vemos mañana",
+        imagen: "foto17.JPEG" },
+
+      { dia: 18, titulo: "Día del Jersey Navideño Feo",
+        texto: "\n\nT quiero mucho <3 Nos vemos mañana",
+        imagen: "foto18.JPEG" },
+
+      { dia: 19, titulo: "Día Internacional del Emo",
+        texto: "\n\nT quiero mucho <3 Nos vemos mañana",
+        imagen: "foto19.JPEG" },
+
+      { dia: 20, titulo: "Día de las Migas",
+        texto: "\n\nT quiero mucho <3 Nos vemos mañana",
+        imagen: "foto20.JPEG" },
+
+      { dia: 21, titulo: "Día del solsticio de invierno",
+        texto: "\n\nT quiero mucho <3 Nos vemos mañana",
+        imagen: "foto21.png" },
+
+      { dia: 22, titulo: "Día Mundial del Termómetro",
+        texto: "No se si lo sabes, este día fue nuestro primer beso. M acuerdo que quería hacernos una foto porque yo sabía que quería darte un beso, pero m daba todo mucha vergüenza y por eso tu no sales ni mirando. \n\n Yo m acuerdo muy poco de ese día y como sabía que no m acordaría, quise hacer una foto y esa es. 4 años después (creo, fue en 2022) y muchos besos después, ese sigue siendo mi favorito (aunque no m acuerde). \n\nT quiero mucho <3 Nos vemos mañana",
+        imagen: "foto22.JPEG" },
+
+      { dia: 23, titulo: "Víspera de Nochebuena",
+        texto: "\n\nT quiero mucho <3 Nos vemos mañana",
+        imagen: "foto23.JPEG" },
+
+      { dia: 24, titulo: "Día de Nochebuena!",
+        texto: "Hoy es el último día de adviento\n\n Para esta ocasión he querido rescatar la primera foto que he encontrado que salimos las dos. No es para nada bonita ni mucho menos, pero creo que guardará para siempre un buen recuerdo. Aunque realmente ahí yo no pensase nada de lo que podría pasar, siento que siempre hubo algo especial. \n\n Nos tocó juntas en el avión (aunque fuese por el apellido) y si no fuese por eso, seguro que no estaríamos aquí, aun sigo pensando en lo raro que es que yo quisiera apoyar mi cabeza en tu hombro (no t conocía de nada) y lo raro que es que desde el primer día que hablamos de verdad (no en este viaje), yo ya sintiese que tu no ibas a ser una más (aunque no tenía nada claro, pero siempre me sorprenderá la sensación que tuve después de ese día, nunca sentí nada parecido).\n\nT quiero mucho <3 Nos vemos mañana",
+        imagen: "foto24.png" },
+
+      { dia: 25, titulo: "Feliz Navidad",
+        texto: "Hoy no hay mensaje (porque ya acabó el adviento), pero sí hay sorpresa 🫢\n\nYa puedes abrirlo (si no lo habías hecho ya...).\n\n¡Y esta foto es tu pista!",
+        imagen: "foto25.jpg" }
+    ];
+
+    const CODIGOS_POR_DIA = {
+      1: "SIDA",
+      2: "CADENA",
+      3: "GAFAS3D",
+      4: "GUEPARDO",
+      5: "TIERRA",
+      6: "LEY",
+      7: "VELAS",
+      8: "VIRGEN",
+      9: "SOBRE",
+      10: "PILAR",
+      11: "MONTES",
+      12: "WIFI",
+      13: "CORO",
+      14: "MONO",
+      15: "OTAKU",
+      16: "PIANO",
+      17: "NADA",
+      18: "JERSEY",
+      19: "EMO",
+      20: "MIGAS",
+      21: "INVIERNO",
+      22: "FIEBRE",
+      23: "VISPERA",
+      24: "NOCHEBUENA",
+      25: "NAVIDAD"
+    };
 
     /* ==========================================================
-       2. ESTRUCTURA DE FILAS DEL ÁRBOL (Igual que en la foto)
-       Fila 1: 1 casilla | Fila 2: 2 casillas ... Fila 7: 4 casillas
+       2. ESTRUCTURA DE FILAS DEL ÁRBOL
        ========================================================== */
-    const estructuraFilasArbol = [1, 2, 3, 4, 5, 5, 4]; // Suma = 24 casillas
+    const estructuraFilasArbol = [1, 2, 3, 4, 5, 5, 4]; // Suma = 24 bolas + estrella 25
 
     const contenedorArbol = document.getElementById("contenedor-arbol");
     let puertasAbiertas = JSON.parse(localStorage.getItem("adviento_arbol_abiertas")) || [];
+    let diasDesbloqueados = JSON.parse(localStorage.getItem("adviento_desbloqueados")) || [];
 
     function dibujarArbol() {
       contenedorArbol.innerHTML = "";
       let indiceSorpresa = 0;
 
-      // Bucle externo: recorre cada piso/fila del árbol
       for (let fila = 0; fila < estructuraFilasArbol.length; fila++) {
         const divFila = document.createElement("div");
         divFila.className = "fila-arbol";
 
         const cantidadEnEstaFila = estructuraFilasArbol[fila];
 
-        // Bucle interno: coloca las etiquetas correspondientes a esa fila
         for (let col = 0; col < cantidadEnEstaFila; col++) {
-          if (indiceSorpresa >= sorpresas.length) break;
+          if (indiceSorpresa >= 24) break;
 
           const item = sorpresas[indiceSorpresa];
           const estaAbierta = puertasAbiertas.includes(item.dia);
 
           const casilla = document.createElement("div");
-          // Aplica su estilo vintage único (estilo-1 hasta estilo-24)
           casilla.className = `casilla estilo-${item.dia}` + (estaAbierta ? " abierta" : "");
           casilla.innerHTML = `<span class="numero">${item.dia}</span>`;
           casilla.onclick = () => intentarAbrirCasilla(item);
 
           divFila.appendChild(casilla);
           indiceSorpresa++;
-          // Conectar la estrella con el día 25
+        }
+
+        contenedorArbol.appendChild(divFila);
+      }
+
+      // Conectar la estrella con el día 25
       const sorpresa25 = sorpresas.find(s => s.dia === 25);
       const estrella = document.getElementById("estrella-25");
       if (sorpresa25 && estrella) {
         estrella.classList.toggle("abierta", puertasAbiertas.includes(25));
         estrella.onclick = () => intentarAbrirCasilla(sorpresa25);
       }
-        }
-
-        contenedorArbol.appendChild(divFila);
-      }
     }
+    
+    let itemPendienteDesbloqueo = null;
 
     function intentarAbrirCasilla(item) {
       if (BLOQUEAR_POR_FECHA_REAL) {
         const hoy = new Date();
-        const mes = hoy.getMonth(); // Diciembre es el mes 11 (empieza en 0)
-        const diaHoy = hoy.getDate();
+        const mesActual = 11; // CAMBIAR POR DIA Y MES ACTUAL
+        const diaActual = 6;
 
-        if (mes !== 11 || diaHoy < item.dia) {
-          mostrarModal({
-            dia: item.dia,
-            titulo: "🔒 Bloqueat",
-            texto: `Ten pacienciaa! Se desbloqueará el ${item.dia} de diciembre.`
-          });
+        // 1. Aún no ha llegado el día -> Ventana bonita de aviso
+        if (mesActual < MES_CALENDARIO || (mesActual === MES_CALENDARIO && diaActual < item.dia)) {
+          mostrarVentanaAviso(
+            "¡Aún es pronto! 🎄",
+            `Todavía no toca abrir esta bolica.\n\nPodrás descubrir la sorpresa el ${item.dia} de diciembre. ✨`,
+            false
+          );
+          return;
+        }
+
+        // 2. El día YA PASÓ y no está desbloqueado -> Ventana bonita con casilla de código
+        const yaDesbloqueado = diasDesbloqueados.includes(item.dia);
+        const diaYaPaso = (mesActual === MES_CALENDARIO && diaActual > item.dia) || mesActual > MES_CALENDARIO;
+
+        if (diaYaPaso && !yaDesbloqueado) {
+          itemPendienteDesbloqueo = item;
+          mostrarVentanaAviso(
+            `Día ${item.dia} bloqueado 🔒`,
+            `¡Se pasó el ${item.dia} de diciembre!\n\nSi quieres leerlo de nuevo, juguemos, pide tu pista\n\n Encuentra el código secreto de este día para desbloquear la bolica:`,
+            true
+          );
           return;
         }
       }
 
+      abrirYGuardarCasilla(item);
+    }
+
+    function mostrarVentanaAviso(titulo, texto, pedirCodigo) {
+      document.getElementById("aviso-titulo").innerText = titulo;
+      document.getElementById("aviso-texto").innerText = texto;
+      document.getElementById("error-codigo").innerText = "";
+
+      const zonaCodigo = document.getElementById("zona-codigo");
+      const btnCerrarNormal = document.getElementById("btn-cerrar-aviso");
+      const inputCodigo = document.getElementById("input-codigo");
+
+      if (pedirCodigo) {
+        zonaCodigo.style.display = "block";
+        btnCerrarNormal.style.display = "none";
+        inputCodigo.value = "";
+        document.getElementById("modal-aviso").style.display = "flex";
+        setTimeout(() => inputCodigo.focus(), 100);
+      } else {
+        zonaCodigo.style.display = "none";
+        btnCerrarNormal.style.display = "inline-block";
+        document.getElementById("modal-aviso").style.display = "flex";
+      }
+    }
+
+    function comprobarCodigo() {
+      if (!itemPendienteDesbloqueo) return;
+
+      const escrito = document.getElementById("input-codigo").value.trim().toUpperCase();
+      const correcto = (CODIGOS_POR_DIA[itemPendienteDesbloqueo.dia] || "").toUpperCase();
+
+      if (escrito === correcto && correcto !== "") {
+        diasDesbloqueados.push(itemPendienteDesbloqueo.dia);
+        localStorage.setItem("adviento_desbloqueados", JSON.stringify(diasDesbloqueados));
+        const itemParaAbrir = itemPendienteDesbloqueo;
+        cerrarAviso();
+        abrirYGuardarCasilla(itemParaAbrir);
+      } else {
+        document.getElementById("error-codigo").innerText = "❌ Código incorrecto. ¡Pide tu pista!";
+        document.getElementById("input-codigo").select();
+      }
+    }
+
+    function cerrarAviso() {
+      document.getElementById("modal-aviso").style.display = "none";
+      itemPendienteDesbloqueo = null;
+    }
+
+    function abrirYGuardarCasilla(item) {
       if (!puertasAbiertas.includes(item.dia)) {
         puertasAbiertas.push(item.dia);
         localStorage.setItem("adviento_arbol_abiertas", JSON.stringify(puertasAbiertas));
         dibujarArbol();
       }
-
       mostrarModal(item);
     }
-
+    
+      
     function mostrarModal(item) {
       document.getElementById("modal-titulo").innerText = `Día ${item.dia} — ${item.titulo}`;
       document.getElementById("modal-texto").innerText = item.texto;
@@ -1128,11 +1151,11 @@
 
     function reiniciarProgreso() {
       localStorage.removeItem("adviento_arbol_abiertas");
+      localStorage.removeItem("adviento_desbloqueados");
       puertasAbiertas = [];
+      diasDesbloqueados = [];
       dibujarArbol();
     }
-
-    dibujarArbol();
 
     function cambiarVista(modo) {
       document.body.classList.remove('vista-tablet', 'vista-movil');
@@ -1148,6 +1171,16 @@
         document.getElementById('btn-pc').classList.add('activo');
       }
     }
+
+    function abrirExplicacion() {
+      document.getElementById('modal-explicacion').style.display = 'flex';
+    }
+
+    function cerrarExplicacion() {
+      document.getElementById('modal-explicacion').style.display = 'none';
+    }
+
+    dibujarArbol();
   </script>
 </body>
 </html>
